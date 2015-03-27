@@ -1,0 +1,558 @@
+
+
+.app-button-green {
+  color: white;
+  background: #7cb342;
+  border: 1px solid transparent; }
+  .app-button-green.active, .app-button-green.activated {
+    background-color: #558b2f; }
+  .app-button-green:hover {
+    color: white; }
+
+.bar-app-header {
+  background: #7cb342;
+  border-bottom: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26); }
+  .bar-app-header .title, .bar-app-header .button {
+    color: white; }
+
+.app-logo-h {
+  display: inline-block;
+  width: 100%;
+  height: 70px;
+  background: url('../img/dicormo-logo-h.svg') no-repeat center center;
+  text-align: center;
+  margin-bottom: 1em; }
+  .app-logo-h:first-child {
+    margin-top: 1em; }
+
+.app-footer {
+  padding: 0;
+  border-top: none;
+  background: #212121; }
+
+.nav-item {
+  display: block;
+  width: 50%;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: transparent;
+  text-align: center;
+  line-height: 44px;
+  text-decoration: none;
+  font-weight: bold;
+  border: 0; }
+  .nav-item.active {
+    background-color: #7cb342; }
+
+.app-login-content {
+  padding: 1em; }
+
+.app-login-form .list {
+  margin-bottom: 0; }
+  .app-login-form .list .item {
+    margin-bottom: 0.5em; }
+.app-login-form .item-input {
+  margin-bottom: 0.5em;
+  background-color: #fafafa;
+  border-color: #f5f5f5; }
+  .app-login-form .item-input:last-child {
+    margin-bottom: 0; }
+
+label.item.has-error {
+  border-bottom: 2px solid red; }
+
+label.item.has-error-lr {
+  border-left: 2px solid red;
+  border-right: 2px solid red; }
+
+label.item.valid-lr {
+  border-left: 2px solid green;
+  border-right: 2px solid green; }
+
+.link {
+  display: inline-block;
+    float: right;
+  text-transform: uppercase;
+  font-size: 13px;
+    text-align: center;
+    padding: 5px 20px;
+  text-decoration: none; }
+  .link.link-green {
+    font-weight: bold;
+    background: #7cb342;
+  color: #ffffff;
+  }
+  .link.link-green:hover {
+      background: #558b2f;
+  }
+
+.tweets .item-body a {
+  color: #00aced;
+  text-decoration: none; }
+
+.statuses .item-body a {
+  color: #3B5998;
+  text-decoration: none; }
+
+.item {
+  border-color: #eeeeee; }
+
+.card {
+  box-shadow: none;
+  border: 1px solid #eeeeee; }
+
+.post-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1em 0; }
+.post-body a {
+  color: #7cb342;
+  text-decoration: none; }
+
+a {
+    color: #000000;
+    text-decoration: none;
+}
+
+
+.logo {
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    width: 80%;
+    left: 50%;
+    margin: 10% 0 0 -40%;
+
+}
+
+.logo img {
+    width: 30%;
+
+}
+
+.slider {
+    width: 100%;
+    height: auto;
+    height: 100%;
+    min-height: 100%;
+    position: relative;
+    bottom: 35px;
+    background: #000000;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+}
+
+.slider_gif {
+    /*width: 100%;
+    height: 800px;
+    overflow: hidden;
+    position: relative;
+    background: #000000 url("../img/slider.gif") no-repeat;
+    overflow-x: hidden;
+    overflow-y: hidden;*/
+
+    z-index: 1;
+    width: 100%;
+    height: auto;
+
+}
+
+.slider img {
+    width: 100%;
+    height: 100%;
+}
+
+.slide span {
+    position: absolute;
+    top: 60%;
+    margin-top: -95px;
+    padding: 0 30px;
+    z-index: 1;
+    height: 190px;
+    font-family: 'Oswald', sans-serif;
+    color: #ffffff;
+    font-size: 3em;
+    line-height: 1.1em;
+    text-align: center;
+    text-shadow: 3px 2px #333333;
+}
+
+.slider .slide-group {
+    position: relative;
+    font-size: 0;
+    -webkit-transition: all 0s linear;
+    -moz-transition: all 0s linear;
+    transition: all 0s linear
+}
+.slider .slide-group .slide {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    vertical-align: top
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.item-carrera {
+    position: relative;
+
+    overflow: hidden;
+}
+
+.item-carrera span{
+    position: absolute;
+    color: #ffffff;
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    top: 5px;
+    bottom: 5px;
+    right: 5px;
+    left: 5px;
+    padding: 40px 10px;
+    background-color:rgba(0,0,0,0.4);
+    text-shadow: 2px 2px #000000;
+}
+
+.img-carrera {
+    width: 100%;
+    height: 150px;
+
+
+}
+
+.multimedia {
+    background: url("http://dicormo.com/wp-content/uploads/2013/12/Diseno-y-comunicacion-multimedia.jpg");
+    background-size: cover;
+
+}
+
+.mkt {
+    background: url("http://dicormo.com/wp-content/uploads/2013/12/Diseno-de-modas-y-marketing-publicitario.jpg");
+    background-size: cover;
+    background-position: right;
+}
+
+.sustentable {
+    background: url("http://dicormo.com/wp-content/uploads/2013/12/Diseno-de-interiores-y-arquitectura-sustentable.jpg");
+    background-size: cover;
+    background-position: center;
+
+}
+
+.espacios-verdes {
+    background: url("http://dicormo.com/wp-content/uploads/2013/12/Diseno-de-interiores-y-espacios-verdes.jpg");
+    background-size: cover;
+
+}
+
+.feed-results {
+    margin: 30px 0;
+}
+
+.title-section {
+    margin: 30px 0 0 0;
+    font-family: 'Oswald', sans-serif;
+    color: #555555;
+    font-size: 2em;
+    padding: 10px 0;
+}
+
+.ui.horizontal.divider {
+    position: relative;
+    height: auto;
+    margin: 0 0 20px 0;
+    overflow: hidden;
+    line-height: 1;
+    text-align: center;
+    color: #7cb342;
+    font-size: 2em;
+
+}
+
+.ui.horizontal.divider:before {
+    margin-left: -webkit-calc(-50% - 1em);
+    margin-left: calc(-50% - 1em);
+}
+
+.ui.horizontal.divider:after, .ui.horizontal.divider:before {
+    position: absolute;
+    content: '';
+    z-index: 3;
+    width: 50%;
+    top: 50%;
+    height: 0;
+}
+
+.ui.divider:not(.vertical):not(.horizontal), .ui.horizontal.divider:after, .ui.horizontal.divider:before {
+    border-top: 1px solid rgba(0,0,0,.1);
+    border-bottom: 1px solid rgba(255,255,255,.2);
+}
+
+.ui.horizontal.divider:after {
+    margin-left: 1em;
+}
+
+
+.details-face {
+    margin-top: 20px;
+}
+
+.details-face .icone {
+    margin-right: 7px;
+    color: #7cb342;
+}
+
+.item p {
+    white-space: normal !important;
+}
+
+.item p a {
+    color: #7cb342;
+}
+
+.copyright {
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.instalaciones {
+  top: 5px; 
+}
+
+/*PERFIL ALUMNO*/
+.app-student-content{
+    background: #f1f5f7;
+
+}
+
+.content-picture {
+    background: #252525;
+    padding: 20px 0;
+    text-align: center;
+    color: #ffffff;
+    position: relative;
+}
+
+.content-picture .offer_name {
+    text-transform: capitalize;
+    font-size: .9em;
+    height: 80px;
+    padding: 10px 10px;
+    font-weight: 700;
+
+}
+
+.content-picture .picture_student {
+    position: absolute;
+    top: 65%;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: -50px;
+    left: 50%;
+    border: 2px solid #f1f5f7;
+}
+
+.content-picture .picture_student .picture {
+    width: 100%;
+}
+
+.content-options {
+
+    text-align: center;
+    padding-top: 70px;
+    color: #494848;
+    font-size: 1.2em;
+}
+
+.content-clase {
+    padding-top: 20px;
+}
+
+.content-options .info_student {
+    padding: 10px 10px 30px 10px;
+}
+
+.content-options .info_student span.email_student {
+    font-size: .8em;
+}
+
+.content-options .notification {
+    padding: 10px 20px;
+    color: #a4a3a3;
+
+}
+
+.content-options .arrow-more {
+    font-size: 1em;
+}
+
+
+/*HORARIO*/
+.tabs {
+    width: 100%;
+    float: none;
+    list-style: none;
+    position: relative;
+    margin: 0;
+    text-align: left;
+    background: #629524;
+}
+.tabs li {
+    float: left;
+    display: block;
+}
+.tabs input[type="radio"] {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+.tabs label {
+    display: block;
+    padding: 10px 20px 0 20px;
+    border-radius: 2px 2px 0 0;
+    font-size: 20px;
+    font-weight: normal;
+    text-transform: uppercase;
+    background: #629524;
+    cursor: pointer;
+    position: relative;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    color: #ffffff;
+}
+.tabs label:hover {
+
+}
+.tabs .tab-content {
+    z-index: 2;
+    display: none;
+    overflow: hidden;
+    width: 100%;
+    font-size: 17px;
+    line-height: 25px;
+    padding: 25px;
+    position: absolute;
+    top: 53px;
+    left: 0;
+
+}
+.tabs [id^="tab"]:checked + label:after {
+    content: "";
+    width:0px;
+    height:0px;
+    border-left:10px solid transparent; /* izquierda flecha */
+    border-right:10px solid transparent; /* derecha flecha */
+    border-top:10px solid #629524; /* base flecha y color*/
+    font-size:0px;
+    line-height:0px;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    margin-left: -10px;
+
+}
+
+
+.tabs [id^="tab"]:checked ~ [id^="tab-content"] {
+    display: block;
+}
+
+.item-subject{
+
+    background: transparent !important;
+    border: none;
+    border-bottom: 1px solid #e8eaea;
+
+}
+
+.info-subject {
+    white-space: normal;
+
+}
+
+.info-subject span {
+    color: #a6a5a5;
+}
+
+.info-subject span.time{
+    color: #4e8706;
+}
+
+
+.picture_teacher {
+    border-radius: 100%;
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #a6a5a5;
+    border: 2px solid #ffffff;
+}
+
+.picture_teacher img {
+
+    width: 100%;
+    height: auto;
+
+}
+
+
+.list-score .item .subject {
+    float: left;
+    width: 70%;
+    white-space: normal;
+    text-align: left;
+    text-transform: lowercase;
+}
+
+.list-score .item .score {
+    float: left;
+    width: 30%;
+}
+
+.icon-clase {
+    font-size: 3em;
+    margin-top: 20px;
+}
+
+.menu_teacher {
+    top: 40px;
+}
+
+.list-schedule {
+
+    width: 100%;
+    margin: 10px 0;
+    padding: 0;
+    display: block;
+    float: left;
+
+}
+
+.list-schedule li {
+    float: left;
+    width: 33%;
+    height: 50px;
+    padding: 5px 10px;
+    border-right: 2px solid #bfbfbf;
+}
+
+.list-schedule li:last-child {
+    border: none;
+}

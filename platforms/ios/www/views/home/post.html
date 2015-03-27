@@ -1,0 +1,25 @@
+<ion-view>
+  <div class="bar bar-header bar-app-header">
+    <button class="button button-icon" ui-sref="home.feed">
+      <i class="icon ion-ios7-arrow-left"></i>
+    </button>
+    <div class="h1 title">Nota del Blog</div>
+  </div>
+  <ion-content class="has-header" padding="true">
+    <div class="cart">
+      <div class="item item-avatar">
+        <img src="{{post.author.avatar}}" alt=""/>
+
+        <h2>{{post.title}}</h2>
+
+        <p>{{post.date | ago }}</p>
+      </div>
+      <div class="item item-body">
+        <img src="{{post.featured_image.source}}" alt="" class="full-image"/>
+
+        <div class="post-body" ng-bind-html="post.content | unsafe"></div>
+
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

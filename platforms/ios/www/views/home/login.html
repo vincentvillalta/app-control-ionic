@@ -1,0 +1,43 @@
+<ion-header-bar align-title="center" class="bar-app-header">
+  <h1 class="title">Iniciar Sesión</h1>
+</ion-header-bar>
+<ion-view class="has-header ">
+  <ion-content class="app-login-content has-footer">
+
+    <h1 class="app-logo app-logo-h"></h1>
+
+    <form name="loginForm" novalidate="" ng-submit="login(loginForm)">
+
+      <div class="list">
+        <label class="item item-input"
+               ng-class="{ 'has-error-lr' : loginForm.email.$invalid && loginForm.$submitted, 'valid' : loginForm.email.$valid  && loginForm.$submitted}">
+          <span class="input-label">Email:</span>
+          <input type="text"
+                 name="email"
+                 ng-model="credentials.email"
+                 ng-minlength="5"
+                 ng-maxlength="30"
+                 required>
+        </label>
+
+        <label class="item item-input"
+               ng-class="{ 'has-error-lr' : loginForm.password.$invalid  && loginForm.$submitted, 'valid' : loginForm.password.$valid  && loginForm.$submitted}">
+          <span class="input-label">Contraseña:</span>
+          <input type="password"
+                 name="password"
+                 ng-model="credentials.password"
+                 ng-minlength="5"
+                 ng-maxlength="10"
+                 required>
+        </label>
+      </div>
+      <div class="">
+        <button class="button button-block app-button-green" ng-click="login(credentials)">
+          Entrar
+        </button>
+      </div>
+
+    </form>
+
+  </ion-content>
+</ion-view>

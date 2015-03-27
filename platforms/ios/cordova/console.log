@@ -1,0 +1,56 @@
+2015-03-27 09:10:07.937 Ionic2[1857:64583] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/vincentvillalta/Library/Developer/CoreSimulator/Devices/B1ADF646-85EB-4418-9058-6769C8BF9221/data/Containers/Data/Application/D0F3060E-D5AA-4DAF-B977-55B53555F08B/Library/Cookies/Cookies.binarycookies
+2015-03-27 09:10:08.245 Ionic2[1857:64583] Apache Cordova native platform version 3.7.0 is starting.
+2015-03-27 09:10:08.245 Ionic2[1857:64583] Multi-tasking -> Device: YES, App: YES
+2015-03-27 09:10:08.266 Ionic2[1857:64583] Unlimited access to network resources
+2015-03-27 09:10:08.289 Ionic2[1857:64583] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-27 09:10:08.578 Ionic2[1857:64583] [CDVTimer][keyboard] 0.051975ms
+2015-03-27 09:10:08.668 Ionic2[1857:64583] [CDVTimer][splashscreen] 90.394974ms
+2015-03-27 09:10:08.672 Ionic2[1857:64583] [CDVTimer][statusbar] 3.549993ms
+2015-03-27 09:10:08.672 Ionic2[1857:64583] [CDVTimer][TotalPluginStartup] 94.338000ms
+2015-03-27 09:10:08.857 Ionic2[1857:64583] Resetting plugins due to page load.
+2015-03-27 09:10:08.928 Ionic2[1857:64583] Finished load of: file:///Users/vincentvillalta/Library/Developer/CoreSimulator/Devices/B1ADF646-85EB-4418-9058-6769C8BF9221/data/Containers/Bundle/Application/DEB78652-8C3C-4B01-9F9C-1BA4CB3F4623/Ionic2.app/www/index.html
+2015-03-27 09:10:09.001 Ionic2[1857:64583] Received Event: deviceready
+2015-03-27 09:10:42.282 Ionic2[2617:68289] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/vincentvillalta/Library/Developer/CoreSimulator/Devices/B1ADF646-85EB-4418-9058-6769C8BF9221/data/Containers/Data/Application/52F52D63-8AEE-4F31-9A0E-4B87013F07A2/Library/Cookies/Cookies.binarycookies
+2015-03-27 09:10:42.364 Ionic2[2617:68289] Apache Cordova native platform version 3.7.0 is starting.
+2015-03-27 09:10:42.365 Ionic2[2617:68289] Multi-tasking -> Device: YES, App: YES
+2015-03-27 09:10:42.366 Ionic2[2617:68289] Unlimited access to network resources
+2015-03-27 09:10:42.368 Ionic2[2617:68289] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-27 09:10:42.426 Ionic2[2617:68289] [CDVTimer][keyboard] 0.049055ms
+2015-03-27 09:10:42.437 Ionic2[2617:68289] [CDVTimer][splashscreen] 10.738015ms
+2015-03-27 09:10:42.441 Ionic2[2617:68289] [CDVTimer][statusbar] 3.732979ms
+2015-03-27 09:10:42.441 Ionic2[2617:68289] [CDVTimer][TotalPluginStartup] 14.961004ms
+2015-03-27 09:10:42.501 Ionic2[2617:68289] Resetting plugins due to page load.
+2015-03-27 09:10:42.923 Ionic2[2617:68289] Finished load of: file:///Users/vincentvillalta/Library/Developer/CoreSimulator/Devices/B1ADF646-85EB-4418-9058-6769C8BF9221/data/Containers/Bundle/Application/3DE5ECCA-69A4-4DC0-BD93-3AE85E65A57D/Ionic2.app/www/index.html#/home/slide
+2015-03-27 10:06:51.657 Ionic2[4840:421092] Apache Cordova native platform version 3.7.0 is starting.
+2015-03-27 10:06:51.657 Ionic2[4840:421092] Multi-tasking -> Device: YES, App: YES
+2015-03-27 10:06:51.659 Ionic2[4840:421092] Unlimited access to network resources
+2015-03-27 10:06:51.660 Ionic2[4840:421092] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-27 10:06:51.721 Ionic2[4840:421092] [CDVTimer][keyboard] 0.063956ms
+2015-03-27 10:06:51.731 Ionic2[4840:421092] [CDVTimer][splashscreen] 9.947002ms
+2015-03-27 10:06:51.735 Ionic2[4840:421092] [CDVTimer][statusbar] 3.709018ms
+2015-03-27 10:06:51.735 Ionic2[4840:421092] [CDVTimer][TotalPluginStartup] 14.176011ms
+2015-03-27 10:06:51.798 Ionic2[4840:421092] Resetting plugins due to page load.
+2015-03-27 10:06:51.916 Ionic2[4840:421092] Finished load of: file:///Users/vincentvillalta/Library/Developer/CoreSimulator/Devices/B1ADF646-85EB-4418-9058-6769C8BF9221/data/Containers/Bundle/Application/F6894A94-F072-4146-9C6C-792780C0A630/Ionic2.app/www/index.html#/home/slide
+2015-03-27 10:07:34.770 Ionic2[4840:421092] {"id":"3","name":"Prueba Alumno 1","email":"alumno@fraktalweb.com","rol_id":"4","photo":"img/users/user_3.png","created_at":"2015-02-20 22:34:14","updated_at":"2015-02-20 22:34:14","id_member":"64","iat":1427472454,"exp":1427472754}
+2015-03-27 10:08:10.455 Ionic2[4840:421092] {"id":"4","name":"Prueba Profesor 1","email":"profesor@fraktalweb.com","rol_id":"3","photo":"img/users/user_4.png","created_at":"2015-02-20 22:35:29","updated_at":"2015-02-20 22:35:29","iat":1427472490,"exp":1427472790}

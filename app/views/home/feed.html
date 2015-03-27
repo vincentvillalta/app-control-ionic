@@ -1,0 +1,180 @@
+<ion-header-bar align-title="center" class="bar-app-header">
+  <h1 class="title">Instituto Dicormo</h1>
+</ion-header-bar>
+<ion-view>
+  <ion-content padding="true">
+    <h1 class="app-logo app-logo-h"></h1>
+
+    <div class="row">
+      <div class="col col-100 text-justify">En Dicormo el desarrollo de una persona va más allá de competencias y
+        habilidades. Nuestro objetivo como institución educativa es sembrar en nuestros estudiantes el deseo de
+        desarrollarse como emprendedores, con un amplio compromiso de innovación, liderazgo y ética. Satisfaciendo así
+        los retos en la globalización actual.
+      </div>
+    </div>
+
+
+    <h3 class="text-center title-section">OFERTA EDUCATIVA</h3>
+      <div class="ui horizontal header divider">
+          <i class="icon ion-university"></i>
+      </div>
+
+    <div class="row">
+      <div class="col col-50 item-carrera"><span>DISEÑO DE MODA Y MARKETING PUBLICITARIO</span>
+
+        <div class="img-carrera mkt"></div>
+      </div>
+      <div class="col col-50 item-carrera"><span>DISEÑO Y COMUNICACIÓN MULTIMEDIA</span>
+
+        <div class="img-carrera multimedia"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-50 item-carrera"><span>DISEÑO DE INTERIORES Y ARQUITECTURA SUSTEBTABLE</span>
+
+        <div class="img-carrera sustentable"></div>
+      </div>
+      <div class="col col-50 item-carrera"><span>DIPLOMADO EN DISEÑO DE INTERIORES Y ESPACIOS VERDES</span>
+
+        <div class="img-carrera espacios-verdes"></div>
+      </div>
+    </div>
+
+
+    <h3 class="text-center title-section">NUESTRAS INSTALACIONES</h3>
+      <div class="ui horizontal header divider">
+          <i class="icon ion-location"></i>
+      </div>
+
+
+    
+        <ion-slide-box on-slide-changed="slideHasChanged($index)" class="instalaciones">
+      <ion-slide>
+        <img src="http://dicormo.com/wp-content/uploads/2013/12/IMG_7152.jpg" alt=""/>
+      </ion-slide>
+      <ion-slide>
+        <img src="http://dicormo.com/wp-content/uploads/2013/12/IMG_6743.jpg" alt=""/>
+      </ion-slide>
+      <ion-slide>
+        <img src="http://dicormo.com/wp-content/uploads/2013/12/IMG_59543.jpg" alt=""/>
+      </ion-slide>
+      <ion-slide>
+        <img src="http://dicormo.com/wp-content/uploads/2013/12/IMG_7176.jpg" alt=""/>
+      </ion-slide>
+      <ion-slide>
+        <img src="http://dicormo.com/wp-content/uploads/2013/12/IMG_7118.jpg" alt=""/>
+      </ion-slide>
+      <ion-slide>
+        <img src="http://dicormo.com/wp-content/uploads/2013/12/IMG_7019.jpg" alt=""/>
+      </ion-slide>
+      <ion-slide>
+        <img src="http://dicormo.com/wp-content/uploads/2013/12/IMG_7007.jpg" alt=""/>
+      </ion-slide>
+
+    </ion-slide-box
+     
+
+
+    <div class="feed-results">
+
+      <h3 class="text-center title-section">NOTAS INTERESANTES</h3>
+        <div class="ui horizontal header divider">
+            <i class="icon ion-ios7-paper"></i>
+        </div>
+
+      <div class="posts">
+        <div class="list card" ng-repeat="post in posts">
+          <div class="item item-avatar">
+            <h2>{{post.title}}</h2>
+            <p>{{post.date | ago }}</p>
+          </div>
+          <div class="item item-body">
+            <img src="{{post.featured_image.source}}" alt="" class="full-image"/>
+
+            <div ng-bind-html="post.excerpt | unsafe"></div>
+
+          </div>
+          <div class="item">
+            <p>
+              <a ui-sref="home.post({id:{{post.ID}}})" class="link link-green">Leer artículo</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="text-center title-section">SIGUENOS EN TWITTER</h3>
+        <div class="ui horizontal header divider">
+            <i class="icon ion-social-twitter"></i>
+        </div>
+
+      <div class="tweets">
+
+        <div class="list" ng-repeat="tweet in tweets">
+
+          <div class="item item-avatar">
+            <img src="{{tweet.user.profile_image_url}}" alt=""/>
+
+            <h2>@{{tweet.user.screen_name}}</h2>
+
+            <p>{{ tweet.created_at | ago }}</p>
+          </div>
+
+          <div class="item item-thumbnail-left" href="#">
+
+            <img src="{{tweet.entities.media[0].media_url}}" alt="" ng-show="tweet.entities.media[0].media_url"
+                 class="full-image"/>
+
+            <p ng-bind-html="tweet.text | linky:'_blank' | hash_twitter "></p>
+
+          </div>
+
+        </div>
+      </div>
+
+      <h3 class="text-center title-section">SIGUENOS EN FACEBOOK</h3>
+        <div class="ui horizontal header divider">
+            <i class="icon ion-social-facebook"></i>
+        </div>
+
+      <div class="statuses">
+
+        <div class="list" ng-repeat="status in statuses">
+
+          <div class="item item-avatar">
+            <img src="http://graph.facebook.com/InstitutoDicormoOficial/picture" alt=""/>
+
+            <h2>Instituto Dicormo</h2>
+
+            <p>{{ status.created_time | ago }}</p>
+          </div>
+
+          <div class="item item-thumbnail-left" href="#">
+
+            <img src="{{status.picture }}" alt="" class="full-image" ng-show="status.type"/>
+
+            <p ng-bind-html="status.message | linky:'_blank' | hash_facebook "></p>
+
+            <div class="details-face">
+              <a href="#" class="subdued"><i class="icone icon ion-thumbsup"></i>{{status.likes.data.length ?
+                status.likes.data.length : '0'}} Like(s)</a> <br/>
+              <a href="#" class="subdued"><i class="icone ion-chatbox-working"></i>{{status.comments.data.length ?
+                status.comments.data.length: '0' }} Comentario(s)</a>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <div class="row">
+      <div class="col-100">
+        <div class="copyright"></div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>
