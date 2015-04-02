@@ -26,11 +26,48 @@ angular.module('DicormoApp')
               if(res.data && res.data.code == 0)
               {
                   store.set('token', res.data.response.token);
-                  store.set('user', res.data.user);
                   console.log(res.data.user);
                   if (res.data.user.rol_id == 4) {
+                    var $http = angular.injector(['ng']).get('$http');
+                    var url = 'http://104.236.42.145/app/student/' +res.data.user.id_member
+                    console.log(url);
+                    $http.get(url).
+                    success(function(data, status, headers, config) {
+                      $scope.posts = data;
+                      console.log(data);
+                      store.set('user', data);
+                    }).
+                    error(function(data, status, headers, config) {
+                      console.log(headers);
+                    });
                     $location.path("/home/student");
                   }else if (res.data.user.rol_id == 3){
+                    var $http = angular.injector(['ng']).get('$http');
+                    var url = 'http://104.236.42.145/app/teacher/' +res.data.user.id
+                    console.log(url);
+                    $http.get(url).
+                    success(function(data, status, headers, config) {
+                      $scope.posts = data;
+                      console.log(data);
+                      store.set('user', data);
+                    }).
+                    error(function(data, status, headers, config) {
+                      console.log(headers);
+                    });
+
+                    var classes_url =  'http://104.236.42.145/app/teacher/'+res.data.user.id+'/clases'
+                    $http.get(classes_url).
+                    success(function(data, status, headers, config) {
+                      $scope.posts = data;
+                      console.log(data);
+                      store.set('clases', data);
+                    }).
+                    error(function(data, status, headers, config) {
+                      console.log(headers);
+                    });
+
+
+
                     $location.path("/home/teacher");
                   }else{
                     $location.path("/home/login");
@@ -55,7 +92,7 @@ angular.module('DicormoApp')
         //decodificamos para obtener los datos del user
         var tokenPayload = jwtHelper.decodeToken(token);
         //los mandamos a la vista como user
-        $scope.user = tokenPayload;
+        $scope.user = store.get("user");
         $scope.getStudent = function()
         {
             studentFactory.get().then(function(res)
@@ -76,7 +113,8 @@ angular.module('DicormoApp')
         //decodificamos para obtener los datos del user
         var tokenPayload = jwtHelper.decodeToken(token);
         //los mandamos a la vista como user
-        $scope.user = tokenPayload;
+        $scope.user = store.get("user");
+        $scope.clases = store.get("clases");
         $scope.getStudent = function()
         {
             studentFactory.get().then(function(res)
