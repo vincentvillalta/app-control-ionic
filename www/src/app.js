@@ -57,14 +57,29 @@ angular.module('DicormoApp', ['ionic', 'ngResource', 'ngMessages', 'ngRoute', 'a
         controller: 'LoginCtrl'
       })
       .state('home.student', {
-            url: '/student',
-            /*templateUrl: 'views/home/student.html',*/
-            templateUrl: 'views/home/student.html',
-            controller: 'StudentCtrl'
+          url: '/student',
+          templateUrl: 'views/home/student.html',
+          controller: 'StudentCtrl'
       })
       .state('home.schedule', {
         url: '/schedule',
-        templateUrl: 'views/home/schedule.html'
+        templateUrl: 'views/home/schedule.html',
+        controller: 'ScheduleCtrl'
+      })
+      .state('home.assistance', {
+        url: '/assistance/:id',
+        templateUrl: 'views/home/assistance.html',
+        controller: 'AssistencesCtrl'
+      })
+      .state('home.evaluation', {
+        url: '/evaluation/:id',
+        templateUrl: 'views/home/evaluation.html',
+        controller: 'EvalCtrl'
+      })
+      .state('home.class', {
+        url: '/class/:id',
+        templateUrl: 'views/home/clase.html',
+        controller: 'ClassesCtrl'
       })
       .state('home.score', {
         url: '/score',
@@ -74,6 +89,11 @@ angular.module('DicormoApp', ['ionic', 'ngResource', 'ngMessages', 'ngRoute', 'a
         url: '/teacher',
         templateUrl: 'views/home/teacher.html',
         controller: 'TeacherCtrl'
+      })
+      .state('home.before_score', {
+        url: '/before_score',
+        templateUrl: 'views/home/before_score.html',
+        controller: 'ListCtrl'
       })
 
     ;
