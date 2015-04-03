@@ -19,12 +19,12 @@
         <div class="content-options">
             <div class="info_student">
                 {{user.name}} {{user.last_name}}<br/>
-                <span class="email_student"><i class="icon ion-android-mail"></i>{{user.email}}</span>
+                <span class="email_student"><i class="icon ion-android-mail"></i> {{user.email}}</span>
             </div>
 
             <div class="list">
 
-                <a class="item item-icon-left item-icon-right text-left" href=" http://104.236.42.145/app/student/{{user.id}}/schedule/{{user.horario.id}}">
+                <a class="item item-icon-left item-icon-right text-left" ui-sref="home.schedule">
                     <i class="icon ion-calendar"></i>
                     Horario
                     <i class="icon arrow-more ion-chevron-right"></i>

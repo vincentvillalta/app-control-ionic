@@ -58,13 +58,13 @@ angular.module('DicormoApp', ['ionic', 'ngResource', 'ngMessages', 'ngRoute', 'a
       })
       .state('home.student', {
             url: '/student',
-            /*templateUrl: 'views/home/student.html',*/
             templateUrl: 'views/home/student.html',
             controller: 'StudentCtrl'
       })
       .state('home.schedule', {
         url: '/schedule',
-        templateUrl: 'views/home/schedule.html'
+        templateUrl: 'views/home/schedule.html',
+        controller: 'ScheduleCtrl'
       })
       .state('home.score', {
         url: '/score',

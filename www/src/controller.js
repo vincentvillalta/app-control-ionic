@@ -106,6 +106,26 @@ angular.module('DicormoApp')
         }
     }])
 
+    .controller('ScheduleCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)
+    {
+        
+        var user = store.get("user");
+        var $http = angular.injector(['ng']).get('$http');
+        var url = 'http://104.236.42.145/app/student/' +user.id+'/schedule/'+user.horario.id
+
+
+        
+        $http.get(url).
+          success(function(data, status, headers, config) {
+            console.log(data);
+            $scope.schedule = data;
+            $scope.user = store.get("user");
+          }).
+          error(function(data, status, headers, config) {
+          console.log(headers);
+        });
+    }])
+
     .controller('TeacherCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)
     {
         //obtenemos el token en localStorage
