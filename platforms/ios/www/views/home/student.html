@@ -6,7 +6,7 @@
     <ion-content class="app-student-content has-footer">
 
         <div class="content-picture">
-            <div class="offer_name">SEGUNDO SEMESTRE <br/> DISEÑO DE INTERIORES Y ARQUITECTURA SUSTEMTABLE</div>
+            <div class="offer_name">{{user.semester.name}} <br/> {{user.offer.name}}</div>
             <div class="picture_student">
                 <img src={{"http://coo5.tuvotacion.com:81/imagenes_opciones/cual-es-el-chico-mas-guapo-y-sexy-68390.jpg"}}
                     alt="student_name" class="picture"/>
@@ -15,15 +15,16 @@
                     alt="student_name" class="picture"/> -->
             </div>
         </div>
+
         <div class="content-options">
             <div class="info_student">
-                {{user.name}} <br/>
+                {{user.name}} {{user.last_name}}<br/>
                 <span class="email_student"><i class="icon ion-android-mail"></i> {{user.email}}</span>
             </div>
 
             <div class="list">
 
-                <a class="item item-icon-left item-icon-right text-left" href="#">
+                <a class="item item-icon-left item-icon-right text-left" ui-sref="home.schedule">
                     <i class="icon ion-calendar"></i>
                     Horario
                     <i class="icon arrow-more ion-chevron-right"></i>
@@ -38,11 +39,9 @@
 
 
             </div>
-
             <p class="notification">La sección de calificaciones estará activa durante el periodo de entrega.</p>
 
         </div>
-
     </ion-content>
 
 </ion-view>
