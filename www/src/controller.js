@@ -1,5 +1,5 @@
 angular.module('DicormoApp')
-  .controller('LoginCtrl', ['$scope', '$ionicLoading', 'AuthService','CONFIG', 'jwtHelper', 'store', '$location', function ($scope, $ionicLoading, AuthService, CONFIG, jwtHelper, store, $location) {
+  .controller('LoginCtrl', ['$scope', '$ionicLoading', 'AuthService','CONFIG', 'jwtHelper', 'store', '$location', '$stateParams', function ($scope, $ionicLoading, AuthService, CONFIG, jwtHelper, store, $location, $stateParams) {
     var _form = null;
     $scope.credentials = {
       username: '',
@@ -119,6 +119,25 @@ angular.module('DicormoApp')
           success(function(data, status, headers, config) {
             console.log(data);
             $scope.schedule = data;
+            $scope.user = store.get("user");
+          }).
+          error(function(data, status, headers, config) {
+          console.log(headers);
+        });
+    }])
+
+    .controller('ClassesCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
+    {
+        
+        var user = store.get("user");
+        var $http = angular.injector(['ng']).get('$http');
+        var clases  = $stateParams.id;
+         var url = 'http://104.236.42.145/app/teacher/'+user.id+'/clases/'+clases
+        
+        $http.get(url).
+          success(function(data, status, headers, config) {
+            console.log(data);
+            $scope.clases = data;
             $scope.user = store.get("user");
           }).
           error(function(data, status, headers, config) {

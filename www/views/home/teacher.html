@@ -23,7 +23,7 @@
 
             <div class="list">
 
-                <a class="item item-icon-left item-icon-right text-left" ng-repeat="clase in clases" href="http://104.236.42.145/app/teacher/{{user.id}}/clases/{{clase.id}}"><!-- {{clase.id}} -->
+                <a class="item item-icon-left item-icon-right text-left" ng-repeat="clase in clases" ui-sref="home.class({id: {{clase.id}}})"><!-- {{clase.id}} -->
                     <i class="icon ion-link"></i>
                     {{clase.subject_id.name}}
                     <i class="icon arrow-more ion-chevron-right"></i>
