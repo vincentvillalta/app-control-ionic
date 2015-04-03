@@ -1,0 +1,81 @@
+
+<ion-view title="Editar información">
+
+    <ion-content>
+
+        <div class="login_form">
+            <p class="notification">Manten tus datos actualizados.</p>
+            <form name="StudentForm" novalidate="" ng-submit="updateStudent(StudentForm)">
+
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">Name:</span>
+                        <input type="text"
+                               name="name"
+                               ng-model="studentData.name"
+                               required disabled>
+                    </label>
+
+                    <label class="item item-input">
+                        <span class="input-label">Apellido:</span>
+                        <input type="text"
+                               name="apellido"
+                               ng-model="studentData.last_name"
+                               required disabled>
+                    </label>
+
+                    <label class="item item-input"
+                           ng-class="{ 'has-error-lr' : StudentForm.email.$invalid  && StudentForm.$submitted, 'valid' : StudentForm.email.$valid  && StudentForm.$submitted}">
+                        <span class="input-label">Email:</span>
+                        <input type="text"
+                               name="email"
+                               ng-model="studentData.email"
+                               ng-minlength="5"
+                               ng-maxlength="10"
+                               required>
+                    </label>
+
+                    <label class="item item-input"
+                           ng-class="{ 'has-error-lr' : StudentForm.address.$invalid  && StudentForm.$submitted, 'valid' : StudentForm.address.$valid  && StudentForm.$submitted}">
+                        <span class="input-label">Dirección:</span>
+                        <input type="text"
+                               name="address"
+                               ng-model="studentData.address"
+                               ng-minlength="5"
+                               ng-maxlength="10"
+                               required>
+                    </label>
+
+                    <label class="item item-input"
+                           ng-class="{ 'has-error-lr' : StudentForm.phone.$invalid  && StudentForm.$submitted, 'valid' : StudentForm.phone.$valid  && StudentForm.$submitted}">
+                        <span class="input-label">Teléfono:</span>
+                        <input type="text"
+                               name="phone"
+                               ng-model="studentData.phone"
+                               ng-minlength="5"
+                               ng-maxlength="10"
+                               required>
+                    </label>
+                    <label class="item item-input"
+                           ng-class="{ 'has-error-lr' : StudentForm.cellphone.$invalid  && StudentForm.$submitted, 'valid' : StudentForm.cellphone.$valid  && StudentForm.$submitted}">
+                        <span class="input-label">Celular:</span>
+                        <input type="text"
+                               name="cellphone"
+                               ng-model="studentData.cellphone"
+                               ng-minlength="5"
+                               ng-maxlength="10"
+                               required>
+                    </label>
+                </div>
+                <div class="">
+                    <button class="nav-clear button button-block app-button-green" ng-click="updateStudent(studentData)">
+                        Guardar
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+
+    </ion-content>
+</ion-view>
