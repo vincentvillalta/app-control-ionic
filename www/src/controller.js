@@ -93,17 +93,8 @@ angular.module('DicormoApp')
         var tokenPayload = jwtHelper.decodeToken(token);
         //los mandamos a la vista como user
         $scope.user = store.get("user");
-        $scope.getStudent = function()
-        {
-            studentFactory.get().then(function(res)
-            {
-                if(res.data && res.data.code == 0)
-                {
-                    store.set('token', res.data.response.token);
-                    $scope.student = res.data.response.student;
-                }
-            });
-        }
+        $scope.$apply()
+
     }])
 
     .controller('ScheduleCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)
@@ -113,17 +104,22 @@ angular.module('DicormoApp')
         var $http = angular.injector(['ng']).get('$http');
         var url = 'http://104.236.42.145/app/student/' +user.id+'/schedule/'+user.horario.id
 
-
+        var semaphore = false;
         
         $http.get(url).
           success(function(data, status, headers, config) {
             console.log(data);
             $scope.schedule = data;
             $scope.user = store.get("user");
+            $scope.$apply()
           }).
           error(function(data, status, headers, config) {
           console.log(headers);
         });
+
+
+
+
     }])
 
     .controller('ClassesCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
@@ -139,10 +135,13 @@ angular.module('DicormoApp')
             console.log(data);
             $scope.clases = data;
             $scope.user = store.get("user");
+            $scope.$apply()
           }).
           error(function(data, status, headers, config) {
           console.log(headers);
         });
+
+         
     }])
 
     .controller('TeacherCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)
@@ -165,6 +164,7 @@ angular.module('DicormoApp')
                 }
             });
         }
+
     }])
 
   .controller('FeedCtrl', ['$scope', 'Twitter', 'Facebook', 'Blog', function ($scope, Twitter, Facebook, Blog) {
