@@ -66,6 +66,16 @@ angular.module('DicormoApp', ['ionic', 'ngResource', 'ngMessages', 'ngRoute', 'a
         templateUrl: 'views/home/schedule.html',
         controller: 'ScheduleCtrl'
       })
+      .state('home.assistance', {
+        url: '/assistance/:id',
+        templateUrl: 'views/home/assistance.html',
+        controller: 'AssistencesCtrl'
+      })
+      .state('home.evaluation', {
+        url: '/evaluation/:id',
+        templateUrl: 'views/home/evaluation.html',
+        controller: 'EvalCtrl'
+      })
       .state('home.class', {
         url: '/class/:id',
         templateUrl: 'views/home/clase.html',

@@ -140,8 +140,46 @@ angular.module('DicormoApp')
           error(function(data, status, headers, config) {
           console.log(headers);
         });
+    }])
 
-         
+    .controller('AssistencesCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
+    {
+        
+        var user = store.get("user");
+        var $http = angular.injector(['ng']).get('$http');
+        var clases  = $stateParams.id;
+        var url = 'http://104.236.42.145/app/teacher/'+user.id+'/clases/'+clases+'/asistencias'
+        console.log(url)
+        $http.get(url).
+          success(function(data, status, headers, config) {
+            console.log(data);
+            $scope.assistances = data;
+            $scope.user = store.get("user");
+            $scope.$apply()
+          }).
+          error(function(data, status, headers, config) {
+          console.log(headers);
+        });
+    }])
+
+    .controller('EvalCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
+    {
+        
+        var user = store.get("user");
+        var $http = angular.injector(['ng']).get('$http');
+        var clases  = $stateParams.id;
+        var url = 'http://104.236.42.145/app/teacher/'+user.id+'/clases/'+clases+'/evaluation'
+        console.log(url)
+        $http.get(url).
+          success(function(data, status, headers, config) {
+            console.log(data);
+            $scope.evaluation = data;
+            $scope.user = store.get("user");
+            $scope.$apply()
+          }).
+          error(function(data, status, headers, config) {
+          console.log(headers);
+        });
     }])
 
     .controller('TeacherCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)

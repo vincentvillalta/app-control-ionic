@@ -4,8 +4,6 @@
 
 <ion-view class="has-header ">
     <ion-content class="app-student-content has-footer">
-
-
         <div class="content-options content-clase">
 
             <div class="info_student ">
@@ -15,42 +13,13 @@
 
                 <ul class="list text-left">
 
-                    <li class="item item-checkbox item-checkbox-right">
 
-                        Alumno Apellido Uno
+                    <li class="item item-checkbox" ng-repeat="alumno in assistances.alumnos">
                         <label class="checkbox checkbox-balanced">
                             <input type="checkbox">
                         </label>
+                        {{alumno.name}} {{alumno.last_name}}
                     </li>
-
-                    <li class="item item-checkbox">
-                        <label class="checkbox checkbox-balanced">
-                            <input type="checkbox">
-                        </label>
-                        Alumno Apellido Dos
-                    </li>
-
-                    <li class="item item-checkbox">
-                        <label class="checkbox checkbox-balanced">
-                            <input type="checkbox">
-                        </label>
-                        Alumno Apellido Tres
-                    </li>
-
-                    <li class="item item-checkbox">
-                        <label class="checkbox checkbox-balanced">
-                            <input type="checkbox">
-                        </label>
-                        Alumno Apellido Cuatro
-                    </li>
-
-                    <li class="item item-checkbox">
-                        <label class="checkbox checkbox-balanced">
-                            <input type="checkbox">
-                        </label>
-                        Alumno Apellido Cinco
-                    </li>
-
                 </ul>
 
 

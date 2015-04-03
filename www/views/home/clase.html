@@ -9,7 +9,6 @@
 
             <div class="info_student ">
                 <h4 class="text-center">HORARIOS</h4>
-
                 <ul class="list-schedule" ng-repeat="clase in clases.week" >
                     <li><i class="ion ion-navigate"></i> {{clase.name}} </li>
                     <li><i class="ion ion-android-clock"></i> {{clase.pivot.time_start}} a {{clase.pivot.time_end}} </li>
@@ -23,13 +22,13 @@
 
             <div class="list menu_teacher">
 
-                <a class="item item-icon-left item-icon-right text-left" href="#">
+                <a class="item item-icon-left item-icon-right text-left" ui-sref="home.assistance({id: clases.id})" >
                     <i class="icon ion-checkmark-circled"></i>
                     Asistencias
                     <i class="icon arrow-more ion-chevron-right"></i>
                 </a>
 
-                <a class="item item-icon-left item-icon-right text-left" href="#">
+                <a class="item item-icon-left item-icon-right text-left" ui-sref="home.evaluation({id: clases.id})">
                     <i class="icon ion-clipboard"></i>
                     Calificaciones
                     <i class="icon arrow-more ion-chevron-right"></i>
