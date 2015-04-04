@@ -6,35 +6,34 @@
     <ion-content class="app-student-content has-footer">
 
         <div class="content-picture">
-            <div class="offer_name">SEGUNDO SEMESTRE <br/> DISEÑO DE INTERIORES Y ARQUITECTURA SUSTEMTABLE</div>
+            <div class="offer_name">{{user.semester.name}} <br/> {{user.offer.name}}</div>
             <div class="picture_student">
                 <img src="http://coo5.tuvotacion.com:81/imagenes_opciones/cual-es-el-chico-mas-guapo-y-sexy-68390.jpg"
                     alt="student_name" class="picture"/>
             </div>
         </div>
-
         <div class="content-options">
             <div class="info_student">
-                PERLA GUADALUPE DE JESUS RAYA OCHOA <br/>
-                <span class="email_student"><i class="icon ion-android-mail"></i>&nbsp;unemailmuymuylargo@otrodominiolargo.com</span>
+                {{user.name}} {{user.last_name}} <br/>
+                <span class="email_student"><i class="icon ion-android-mail"></i>&nbsp; {{user.email}}</span>
             </div>
-
-            <h4>Evaluaciones</h4>
-
-                     <ion-list>
-        <div ng-repeat="group in groups">
+      <h4>Evaluaciones</h4>
+      <ion-list>
+        <div ng-repeat="group in preEvaluations">
           <ion-item class="item-stable"
                     ng-click="toggleGroup(group)"
                     ng-class="{active: isGroupShown(group)}">
               <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
             &nbsp;
-            Group {{group.name}}
+            Group {{group.name}} 
           </ion-item>
-          <ion-item class="item-accordion"
-                    ng-repeat="item in group.items"
-                    ng-show="isGroupShown(group)">
-            {{item}}
-          </ion-item>
+          
+            <ion-item class="item-accordion"
+                      ng-repeat="item in group.evaluaciones"
+                      ng-show="isGroupShown(group)">
+             <a ui-sref="home.studentScore({mes: group.no_month, num: item.no_evaluation})"><div>{{item.no_evaluation}}</div></a>
+            </ion-item>
+
         </div>
       </ion-list>
 

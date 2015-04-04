@@ -142,6 +142,81 @@ angular.module('DicormoApp')
         });
     }])
 
+    .controller('BeforeScoreCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
+    {
+        
+        var user = store.get("user");
+        var $http = angular.injector(['ng']).get('$http');
+        var clases  = $stateParams.id;
+        var url = 'http://104.236.42.145/app/student/'+user.id+'/evaluaciones'
+        $scope.toggleGroup = function(group) {
+          console.log("call")
+          if ($scope.isGroupShown(group)) {
+            $scope.shownGroup = null;
+          } else {
+            $scope.shownGroup = group;
+          }
+        };
+        $scope.isGroupShown = function(group) {
+          return $scope.shownGroup === group;
+        };
+        $http.get(url).
+          success(function(data, status, headers, config) {
+            console.log(data);
+            $scope.preEvaluations = data;
+            $scope.user = store.get("user");
+            $scope.$apply()
+          }).
+          error(function(data, status, headers, config) {
+          console.log(headers);
+        });
+    }])
+
+    .controller('StudentScoreCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
+    {
+        
+        var user = store.get("user");
+        var $http = angular.injector(['ng']).get('$http');
+        var mes  = $stateParams.mes;
+        var num = $stateParams.num;
+        var url = 'http://104.236.42.145/app/student/'+user.id+'/calificaciones/'+mes+'/no/'+num
+        
+        $http.get(url).
+          success(function(data, status, headers, config) {
+            console.log(data);
+            $scope.calificacionesStudent = data;
+            $scope.user = store.get("user");
+            $scope.$apply()
+          }).
+          error(function(data, status, headers, config) {
+          console.log(headers);
+        });
+    }])
+
+    .controller('EditStudentCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams','$ionicLoading', 'UpdateService', function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading, UpdateService)
+    {
+        
+        $scope.user = store.get("user");
+        $scope.$apply()
+
+        $scope.updateStudent = function(form) {
+          if(form.$valid) {
+            $scope.doUpdate($scope.user);
+          }
+        };
+        
+        $scope.doUpdate = function(user) {
+          $ionicLoading.show({template: 'Cargando...'});
+          UpdateService.update($scope.user)
+          .then(function (res){
+            if (res.data && res.statusText == 'OK') {
+                $ionicLoading.hide();
+                store.set('user', user);
+            };
+          })
+        }
+    }])
+
     .controller('AssistencesCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
     {
         
@@ -168,7 +243,8 @@ angular.module('DicormoApp')
         var user = store.get("user");
         var $http = angular.injector(['ng']).get('$http');
         var clases  = $stateParams.id;
-        var url = 'http://104.236.42.145/app/teacher/'+user.id+'/clases/'+clases+'/evaluation'
+
+        var url = 'http://104.236.42.145/app/teacher/'+user.id+'/clases/'+clases+'/evaluaciones'
         console.log(url)
         $http.get(url).
           success(function(data, status, headers, config) {
@@ -238,11 +314,13 @@ angular.module('DicormoApp')
     }
   }
   
+  
   /*
    * if given group is the selected group, deselect it
    * else, select the given group
    */
   $scope.toggleGroup = function(group) {
+    console.log("call")
     if ($scope.isGroupShown(group)) {
       $scope.shownGroup = null;
     } else {
@@ -252,6 +330,8 @@ angular.module('DicormoApp')
   $scope.isGroupShown = function(group) {
     return $scope.shownGroup === group;
   };
+
   
-})
-  ;
+});
+
+
