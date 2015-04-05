@@ -4,8 +4,6 @@
 
 <ion-view class="has-header ">
     <ion-content class="app-student-content has-footer">
-
-
         <div class="content-options content-clase">
 
             <div class="info_student ">
@@ -52,28 +50,12 @@
 
                 <ul class="list text-left">
 
-                    <li class="item item-input ">
-                        <span class="input-label">Alumno 1</span>
+                    <li class="item item-input "  ng-repeat="alumno in evaluation.datos">
+                        <span class="input-label">{{alumno.student.name}} {{alumno.student.last_name}}</span>
                         <label class="item item-input">
-                            <input type="text">
+                            <input type="text" value='{{alumno.student.score_parcial}} '>
                         </label>
                     </li>
-
-                    <li class="item item-input ">
-                        <span class="input-label">Alumno 1</span>
-                        <label class="item item-input">
-                            <input type="text">
-                        </label>
-                    </li>
-
-                    <li class="item item-input ">
-                        <span class="input-label">Alumno 1</span>
-                        <label class="item item-input">
-                            <input type="text">
-                        </label>
-                    </li>
-
-
 
                 </ul>
 

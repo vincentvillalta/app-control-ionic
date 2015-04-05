@@ -1,26 +1,30 @@
 
+<ion-header-bar align-title="center" class="bar-app-header" xmlns="http://www.w3.org/1999/html">
+    <h1 class="title">Calificaciones</h1>
+</ion-header-bar>
 <ion-view title="Editar información">
 
     <ion-content>
-
         <div class="login_form">
             <p class="notification">Manten tus datos actualizados.</p>
-            <form name="StudentForm" novalidate="" ng-submit="updateStudent(StudentForm)">
+            <form name="StudentForm" novalidate="" ng-submit="updateStudent(user)">
 
                 <div class="list">
                     <label class="item item-input">
                         <span class="input-label">Name:</span>
                         <input type="text"
                                name="name"
-                               ng-model="studentData.name"
+                               ng-value="name"
+                               ng-model="user.name"
                                required disabled>
                     </label>
 
                     <label class="item item-input">
                         <span class="input-label">Apellido:</span>
                         <input type="text"
-                               name="apellido"
-                               ng-model="studentData.last_name"
+                               name="last_name"
+                               ng-value="last_name"
+                               ng-model="user.last_name"
                                required disabled>
                     </label>
 
@@ -29,9 +33,9 @@
                         <span class="input-label">Email:</span>
                         <input type="text"
                                name="email"
-                               ng-model="studentData.email"
+                               ng-model="user.email"
+                               ng-value="email"
                                ng-minlength="5"
-                               ng-maxlength="10"
                                required>
                     </label>
 
@@ -40,9 +44,9 @@
                         <span class="input-label">Dirección:</span>
                         <input type="text"
                                name="address"
-                               ng-model="studentData.address"
+                               ng-model="user.address"
+                               ng-value="address"
                                ng-minlength="5"
-                               ng-maxlength="10"
                                required>
                     </label>
 
@@ -51,7 +55,8 @@
                         <span class="input-label">Teléfono:</span>
                         <input type="text"
                                name="phone"
-                               ng-model="studentData.phone"
+                               ng-model="user.phone"
+                               ng-value="phone"
                                ng-minlength="5"
                                ng-maxlength="10"
                                required>
@@ -61,14 +66,15 @@
                         <span class="input-label">Celular:</span>
                         <input type="text"
                                name="cellphone"
-                               ng-model="studentData.cellphone"
+                               ng-model="user.cellphone"
+                               ng-value="cellphone"
                                ng-minlength="5"
                                ng-maxlength="10"
                                required>
                     </label>
                 </div>
                 <div class="">
-                    <button class="nav-clear button button-block app-button-green" ng-click="updateStudent(studentData)">
+                    <button class="nav-clear button button-block app-button-green" ng-click="updateStudent(StudentForm)">
                         Guardar
                     </button>
                 </div>

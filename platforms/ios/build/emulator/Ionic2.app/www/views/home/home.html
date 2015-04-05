@@ -1,5 +1,6 @@
 <div ui-view class="has-footer"></div>
 <div class="bar bar-footer app-footer">
   <a ui-sref="home.feed" class="nav-item" ui-sref-active="active">Inicio</a>
-  <a ui-sref="home.login" ui-sref-active="active" class="nav-item">Iniciar sesión</a>
+  <a ui-sref="home.login" ui-sref-active="active" class="nav-item" ng-if="!user">Iniciar sesión</a>
+  <a ui-sref="home.login" ui-sref-active="active" class="nav-item" ng-if="user">Cerrar sesión</a>
 </div>

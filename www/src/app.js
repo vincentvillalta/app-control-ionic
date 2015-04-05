@@ -86,6 +86,11 @@ angular.module('DicormoApp', ['ionic', 'ngResource', 'ngMessages', 'ngRoute', 'a
         templateUrl: 'views/home/editStudent.html',
         controller: 'EditStudentCtrl'
       })
+      .state('home.editTeacher', {
+        url: '/editTeacher',
+        templateUrl: 'views/home/editTeacher.html',
+        controller: 'EditTeacherCtrl'
+      })
       .state('home.score', {
         url: '/score',
         templateUrl: 'views/home/score.html'

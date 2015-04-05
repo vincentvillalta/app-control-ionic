@@ -1,0 +1,86 @@
+
+<ion-header-bar align-title="center" class="bar-app-header" xmlns="http://www.w3.org/1999/html">
+    <h1 class="title">Calificaciones</h1>
+</ion-header-bar>
+<ion-view title="Editar información">
+
+    <ion-content>
+        <div class="login_form">
+            <p class="notification">Manten tus datos actualizados.</p>
+            <form name="StudentForm" novalidate="" ng-submit="updateTeacher(user)">
+                  <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">Name:</span>
+                        <input type="text"
+                               name="name"
+                               ng-value="name"
+                               ng-model="user.name"
+                               required disabled>
+                    </label>
+
+                    <label class="item item-input">
+                        <span class="input-label">Apellido:</span>
+                        <input type="text"
+                               name="last_name"
+                               ng-value="last_name"
+                               ng-model="user.last_name"
+                               required disabled>
+                    </label>
+
+                    <label class="item item-input"
+                           ng-class="{ 'has-error-lr' : StudentForm.email.$invalid  && StudentForm.$submitted, 'valid' : StudentForm.email.$valid  && StudentForm.$submitted}">
+                        <span class="input-label">Email:</span>
+                        <input type="text"
+                               name="email"
+                               ng-model="user.email"
+                               ng-value="email"
+                               ng-minlength="5"
+                               required>
+                    </label>
+
+                    <label class="item item-input"
+                           ng-class="{ 'has-error-lr' : StudentForm.address.$invalid  && StudentForm.$submitted, 'valid' : StudentForm.address.$valid  && StudentForm.$submitted}">
+                        <span class="input-label">Dirección:</span>
+                        <input type="text"
+                               name="address"
+                               ng-model="user.address"
+                               ng-value="address"
+                               ng-minlength="5"
+                               required>
+                    </label>
+
+                    <label class="item item-input"
+                           ng-class="{ 'has-error-lr' : StudentForm.phone.$invalid  && StudentForm.$submitted, 'valid' : StudentForm.phone.$valid  && StudentForm.$submitted}">
+                        <span class="input-label">Teléfono:</span>
+                        <input type="text"
+                               name="phone"
+                               ng-model="user.phone"
+                               ng-value="phone"
+                               ng-minlength="5"
+                               ng-maxlength="10"
+                               required>
+                    </label>
+                    <label class="item item-input"
+                           ng-class="{ 'has-error-lr' : StudentForm.cellphone.$invalid  && StudentForm.$submitted, 'valid' : StudentForm.cellphone.$valid  && StudentForm.$submitted}">
+                        <span class="input-label">Celular:</span>
+                        <input type="text"
+                               name="cellphone"
+                               ng-model="user.cellphone"
+                               ng-value="cellphone"
+                               ng-minlength="5"
+                               ng-maxlength="10"
+                               required>
+                    </label>
+                </div>
+                <div class="">
+                    <button class="nav-clear button button-block app-button-green" ng-click="updateTeacher(StudentForm)">
+                        Guardar
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+
+    </ion-content>
+</ion-view>

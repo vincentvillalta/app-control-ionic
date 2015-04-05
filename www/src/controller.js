@@ -26,7 +26,7 @@ angular.module('DicormoApp')
               if(res.data && res.data.code == 0)
               {
                   store.set('token', res.data.response.token);
-                  console.log(res.data.user);
+                  console.log(res.data);
                   if (res.data.user.rol_id == 4) {
                     var $http = angular.injector(['ng']).get('$http');
                     var url = 'http://104.236.42.145/app/student/' +res.data.user.id_member
@@ -95,6 +95,16 @@ angular.module('DicormoApp')
         $scope.user = store.get("user");
         $scope.$apply()
 
+
+        
+
+    }])
+    .controller('HomeCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)
+    {    
+        var user = store.get("user");
+        $scope.user = store.get("user");
+        $scope.$apply()
+        console.log(user);
     }])
 
     .controller('ScheduleCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)
@@ -103,7 +113,7 @@ angular.module('DicormoApp')
         var user = store.get("user");
         var $http = angular.injector(['ng']).get('$http');
         var url = 'http://104.236.42.145/app/student/' +user.id+'/schedule/'+user.horario.id
-
+        console.log(url)
         var semaphore = false;
         
         $http.get(url).
@@ -128,11 +138,18 @@ angular.module('DicormoApp')
         var user = store.get("user");
         var $http = angular.injector(['ng']).get('$http');
         var clases  = $stateParams.id;
-         var url = 'http://104.236.42.145/app/teacher/'+user.id+'/clases/'+clases
-        
+        var url = 'http://104.236.42.145/app/teacher/'+user.id+'/clases/'+clases
+        console.log(url)
         $http.get(url).
           success(function(data, status, headers, config) {
             console.log(data);
+            var checkURL = 'http://104.236.42.145/app/dateScore';
+              $http.get(checkURL).success(function(response, statusCheck, headersCheck, configCheck) {
+                var startDate = response.enable_date_start_score;
+                var endDate = response.enable_date_end_score;
+                var today = Date.now();
+                if (startDate <= today && today <= endDate) { $scope.active = 'yes' }else{ $scope.active = 'no' }
+              }).error(function(response, statusCheck, headersCheck, configCheck) {console.log(headers)});
             $scope.clases = data;
             $scope.user = store.get("user");
             $scope.$apply()
@@ -149,6 +166,7 @@ angular.module('DicormoApp')
         var $http = angular.injector(['ng']).get('$http');
         var clases  = $stateParams.id;
         var url = 'http://104.236.42.145/app/student/'+user.id+'/evaluaciones'
+        console.log(url)
         $scope.toggleGroup = function(group) {
           console.log("call")
           if ($scope.isGroupShown(group)) {
@@ -180,7 +198,7 @@ angular.module('DicormoApp')
         var mes  = $stateParams.mes;
         var num = $stateParams.num;
         var url = 'http://104.236.42.145/app/student/'+user.id+'/calificaciones/'+mes+'/no/'+num
-        
+        console.log(url)
         $http.get(url).
           success(function(data, status, headers, config) {
             console.log(data);
@@ -208,6 +226,29 @@ angular.module('DicormoApp')
         $scope.doUpdate = function(user) {
           $ionicLoading.show({template: 'Cargando...'});
           UpdateService.update($scope.user)
+          .then(function (res){
+            if (res.data && res.statusText == 'OK') {
+                $ionicLoading.hide();
+                store.set('user', user);
+            };
+          })
+        }
+    }])
+    .controller('EditTeacherCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams','$ionicLoading', 'UpdateService', function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading, UpdateService)
+    {
+        
+        $scope.user = store.get("user");
+        $scope.$apply()
+
+        $scope.updateTeacher = function(form) {
+          if(form.$valid) {
+            $scope.doUpdate($scope.user);
+          }
+        };
+        
+        $scope.doUpdate = function(user) {
+          $ionicLoading.show({template: 'Cargando...'});
+          UpdateTeacherService.update($scope.user)
           .then(function (res){
             if (res.data && res.statusText == 'OK') {
                 $ionicLoading.hide();

@@ -26,7 +26,7 @@ angular.module('DicormoApp')
               if(res.data && res.data.code == 0)
               {
                   store.set('token', res.data.response.token);
-                  console.log(res.data.user);
+                  console.log(res.data);
                   if (res.data.user.rol_id == 4) {
                     var $http = angular.injector(['ng']).get('$http');
                     var url = 'http://104.236.42.145/app/student/' +res.data.user.id_member
@@ -95,6 +95,55 @@ angular.module('DicormoApp')
         $scope.user = store.get("user");
         $scope.$apply()
 
+
+      $scope.getPhoto = function() {
+          Camera.getPicture().then(function(imageURI) {
+              console.log(imageURI);
+              $scope.lastPhoto = imageURI;
+              $scope.upload(); //<-- call to upload the pic
+          },
+          function(err) {
+              console.err(err);
+          }, {
+              quality: 75,
+              targetWidth: 320,
+              targetHeight: 320,
+              saveToPhotoAlbum: false
+          });
+      };
+
+      $scope.upload = function() {
+          var url = 'http://104.236.42.145/app/student/'+user.id+'/updatephoto';
+          var fd = new FormData();
+
+          //previously I had this
+          //angular.forEach($scope.files, function(file){
+              //fd.append('image',file)
+          //});
+
+          fd.append('photo', $scope.lastPhoto);
+
+          $http.post(url, fd, {
+
+              transformRequest:angular.identity,
+              headers:{'Content-Type':'image/png'
+              }
+          })
+          .success(function(data, status, headers){
+              $scope.imageURL = data.resource_uri; //set it to the response we get
+          })
+          .error(function(data, status, headers){
+
+          })
+      }
+
+    }])
+    .controller('HomeCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)
+    {    
+        var user = store.get("user");
+        $scope.user = store.get("user");
+        $scope.$apply()
+        console.log(user);
     }])
 
     .controller('ScheduleCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)
@@ -103,7 +152,7 @@ angular.module('DicormoApp')
         var user = store.get("user");
         var $http = angular.injector(['ng']).get('$http');
         var url = 'http://104.236.42.145/app/student/' +user.id+'/schedule/'+user.horario.id
-
+        console.log(url)
         var semaphore = false;
         
         $http.get(url).
@@ -128,11 +177,18 @@ angular.module('DicormoApp')
         var user = store.get("user");
         var $http = angular.injector(['ng']).get('$http');
         var clases  = $stateParams.id;
-         var url = 'http://104.236.42.145/app/teacher/'+user.id+'/clases/'+clases
-        
+        var url = 'http://104.236.42.145/app/teacher/'+user.id+'/clases/'+clases
+        console.log(url)
         $http.get(url).
           success(function(data, status, headers, config) {
             console.log(data);
+            var checkURL = 'http://104.236.42.145/app/dateScore';
+              $http.get(checkURL).success(function(response, statusCheck, headersCheck, configCheck) {
+                var startDate = response.enable_date_start_score;
+                var endDate = response.enable_date_end_score;
+                var today = Date.now();
+                if (startDate <= today && today <= endDate) { $scope.active = 'yes' }else{ $scope.active = 'no' }
+              }).error(function(response, statusCheck, headersCheck, configCheck) {console.log(headers)});
             $scope.clases = data;
             $scope.user = store.get("user");
             $scope.$apply()
@@ -140,6 +196,105 @@ angular.module('DicormoApp')
           error(function(data, status, headers, config) {
           console.log(headers);
         });
+    }])
+
+    .controller('BeforeScoreCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
+    {
+        
+        var user = store.get("user");
+        var $http = angular.injector(['ng']).get('$http');
+        var clases  = $stateParams.id;
+        var url = 'http://104.236.42.145/app/student/'+user.id+'/evaluaciones'
+        console.log(url)
+        $scope.toggleGroup = function(group) {
+          console.log("call")
+          if ($scope.isGroupShown(group)) {
+            $scope.shownGroup = null;
+          } else {
+            $scope.shownGroup = group;
+          }
+        };
+        $scope.isGroupShown = function(group) {
+          return $scope.shownGroup === group;
+        };
+        $http.get(url).
+          success(function(data, status, headers, config) {
+            console.log(data);
+            $scope.preEvaluations = data;
+            $scope.user = store.get("user");
+            $scope.$apply()
+          }).
+          error(function(data, status, headers, config) {
+          console.log(headers);
+        });
+    }])
+
+    .controller('StudentScoreCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
+    {
+        
+        var user = store.get("user");
+        var $http = angular.injector(['ng']).get('$http');
+        var mes  = $stateParams.mes;
+        var num = $stateParams.num;
+        var url = 'http://104.236.42.145/app/student/'+user.id+'/calificaciones/'+mes+'/no/'+num
+        console.log(url)
+        $http.get(url).
+          success(function(data, status, headers, config) {
+            console.log(data);
+            $scope.calificacionesStudent = data;
+            $scope.user = store.get("user");
+            $scope.$apply()
+          }).
+          error(function(data, status, headers, config) {
+          console.log(headers);
+        });
+    }])
+
+    .controller('EditStudentCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams','$ionicLoading', 'UpdateService', function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading, UpdateService)
+    {
+        
+        $scope.user = store.get("user");
+        $scope.$apply()
+
+        $scope.updateStudent = function(form) {
+          if(form.$valid) {
+            $scope.doUpdate($scope.user);
+          }
+        };
+        
+        $scope.doUpdate = function(user) {
+          $ionicLoading.show({template: 'Cargando...'});
+          UpdateService.update($scope.user)
+          .then(function (res){
+            if (res.data && res.statusText == 'OK') {
+                $ionicLoading.hide();
+                store.set('user', user);
+            };
+          })
+        }
+    }])
+    .controller('EditTeacherCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams','$ionicLoading', 'UpdateService', function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading, UpdateService)
+    {
+        
+        $scope.user = store.get("user");
+        $scope.$apply()
+
+        $scope.updateTeacher = function(form) {
+          if(form.$valid) {
+            $scope.doUpdate($scope.user);
+          }
+        };
+        
+        $scope.doUpdate = function(user) {
+          $ionicLoading.show({template: 'Cargando...'});
+          UpdateTeacherService.update($scope.user)
+          .then(function (res){
+            if (res.data && res.statusText == 'OK') {
+                $ionicLoading.hide();
+                store.set('user', user);
+            };
+          })
+        }
     }])
 
     .controller('AssistencesCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
@@ -168,7 +323,8 @@ angular.module('DicormoApp')
         var user = store.get("user");
         var $http = angular.injector(['ng']).get('$http');
         var clases  = $stateParams.id;
-        var url = 'http://104.236.42.145/app/teacher/'+user.id+'/clases/'+clases+'/evaluation'
+
+        var url = 'http://104.236.42.145/app/teacher/'+user.id+'/clases/'+clases+'/evaluaciones'
         console.log(url)
         $http.get(url).
           success(function(data, status, headers, config) {
@@ -203,6 +359,47 @@ angular.module('DicormoApp')
             });
         }
 
+        $scope.getPhoto = function() {
+            Camera.getPicture().then(function(imageURI) {
+                console.log(imageURI);
+                $scope.lastPhoto = imageURI;
+                $scope.upload(); //<-- call to upload the pic
+            },
+            function(err) {
+                console.err(err);
+            }, {
+                quality: 75,
+                targetWidth: 320,
+                targetHeight: 320,
+                saveToPhotoAlbum: false
+            });
+        };
+
+        $scope.upload = function() {
+            var url = 'http://104.236.42.145/app/teacher/'+user.id+'/updatephoto';
+            var fd = new FormData();
+
+            //previously I had this
+            //angular.forEach($scope.files, function(file){
+                //fd.append('image',file)
+            //});
+
+            fd.append('photo', $scope.lastPhoto);
+
+            $http.post(url, fd, {
+
+                transformRequest:angular.identity,
+                headers:{'Content-Type':'image/png'
+                }
+            })
+            .success(function(data, status, headers){
+                $scope.imageURL = data.resource_uri; //set it to the response we get
+            })
+            .error(function(data, status, headers){
+
+            })
+        }
+
     }])
 
   .controller('FeedCtrl', ['$scope', 'Twitter', 'Facebook', 'Blog', function ($scope, Twitter, Facebook, Blog) {
@@ -225,4 +422,37 @@ angular.module('DicormoApp')
     var post = Blog.get({id: postId}, function () {
       $scope.post = post;
     });
-  }]);
+  }])
+  .controller('ListCtrl', function($scope) {
+  $scope.groups = [];
+  for (var i=0; i<3; i++) {
+    $scope.groups[i] = {
+      name: i,
+      items: []
+    };
+    for (var j=0; j<3; j++) {
+      $scope.groups[i].items.push(i + '-' + j);
+    }
+  }
+  
+  
+  /*
+   * if given group is the selected group, deselect it
+   * else, select the given group
+   */
+  $scope.toggleGroup = function(group) {
+    console.log("call")
+    if ($scope.isGroupShown(group)) {
+      $scope.shownGroup = null;
+    } else {
+      $scope.shownGroup = group;
+    }
+  };
+  $scope.isGroupShown = function(group) {
+    return $scope.shownGroup === group;
+  };
+
+  
+});
+
+

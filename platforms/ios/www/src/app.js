@@ -81,6 +81,16 @@ angular.module('DicormoApp', ['ionic', 'ngResource', 'ngMessages', 'ngRoute', 'a
         templateUrl: 'views/home/clase.html',
         controller: 'ClassesCtrl'
       })
+      .state('home.edit', {
+        url: '/edit',
+        templateUrl: 'views/home/editStudent.html',
+        controller: 'EditStudentCtrl'
+      })
+      .state('home.editTeacher', {
+        url: '/editTeacher',
+        templateUrl: 'views/home/editTeacher.html',
+        controller: 'EditTeacherCtrl'
+      })
       .state('home.score', {
         url: '/score',
         templateUrl: 'views/home/score.html'
@@ -89,6 +99,16 @@ angular.module('DicormoApp', ['ionic', 'ngResource', 'ngMessages', 'ngRoute', 'a
         url: '/teacher',
         templateUrl: 'views/home/teacher.html',
         controller: 'TeacherCtrl'
+      })
+      .state('home.before_score', {
+        url: '/before_score',
+        templateUrl: 'views/home/before_score.html',
+        controller: 'BeforeScoreCtrl'
+      })
+      .state('home.studentScore', {
+        url: '/studentScore/:mes/:num',
+        templateUrl: 'views/home/score.html',
+        controller: 'StudentScoreCtrl'
       })
 
     ;

@@ -6,7 +6,7 @@
     <ion-content class="app-student-content has-footer">
 
         <div class="content-picture">
-            <div class="offer_name">SEGUNDO SEMESTRE <br/> DISEÑO DE INTERIORES Y ARQUITECTURA SUSTEMTABLE</div>
+            <div class="offer_name">{{user.semester.name}} <br/> {{user.offer.name}}</div>
             <div class="picture_student">
                 <img src="http://coo5.tuvotacion.com:81/imagenes_opciones/cual-es-el-chico-mas-guapo-y-sexy-68390.jpg"
                     alt="student_name" class="picture"/>
@@ -15,31 +15,22 @@
 
         <div class="content-options">
             <div class="info_student">
-                PERLA GUADALUPE DE JESUS RAYA OCHOA <br/>
-                <span class="email_student"><i class="icon ion-android-mail"></i>&nbsp;unemailmuymuylargo@otrodominiolargo.com</span>
+                {{user.name}} {{user.last_name}} <br/>
+                <span class="email_student"><i class="icon ion-android-mail"></i>&nbsp; {{user.email}}</span>
             </div>
 
             <h4>Evaluación 1</h4>
 
                     <div class="list list-score">
 
-                        <div class="item">
-                            <div class="subject">TEORIA DE LA SUSTENTABILIDAD</div>
-                            <div class="score"> <span class="badge badge-dark">100</span></div>
-                        </div>
-
-                        <div class="item">
-                            <div class="subject">HISTORIA DEL ARTE , ARQUITECTURA Y EL MUEBLE 1</div>
-                            <div class="score"> <span class="badge badge-dark">100</span></div>
+                        <div class="item" ng-repeat="calificacion in calificacionesStudent">
+                            <div class="subject">{{calificacion.subject.name}}</div>
+                            <div class="score"> <span class="badge badge-dark">{{calificacion.evaluation[0].score_parcial}}</span></div>
                         </div>
 
 
 
                     </div>
-
-
-
-
 
         </div>
 

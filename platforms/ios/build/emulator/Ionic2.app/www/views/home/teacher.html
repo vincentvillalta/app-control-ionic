@@ -10,7 +10,7 @@
             </div>
             <div class="picture_student">
                 <img src="http://coo5.tuvotacion.com:81/imagenes_opciones/cual-es-el-chico-mas-guapo-y-sexy-68390.jpg"
-                    alt="student_name" class="picture"/>
+                    alt="student_name" class="picture" ng-click="getPhoto()"/>
                 <!-- <img src={{user.photo}}
                     alt="student_name" class="picture"/> -->
             </div>
@@ -32,7 +32,11 @@
 
             </div>
 
-
+                <a class="item item-icon-left item-icon-right text-left" ui-sref="home.editTeacher">
+                    <i class="icon ion-edit"></i>
+                    Editar perfil
+                    <i class="icon arrow-more ion-chevron-right"></i>
+                </a>
 
         </div>
 
