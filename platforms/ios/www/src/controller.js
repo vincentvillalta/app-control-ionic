@@ -1,5 +1,5 @@
 angular.module('DicormoApp')
-  .controller('LoginCtrl', ['$scope', '$ionicLoading', 'AuthService','CONFIG', 'jwtHelper', 'store', '$location', '$stateParams', function ($scope, $ionicLoading, AuthService, CONFIG, jwtHelper, store, $location, $stateParams) {
+  .controller('LoginCtrl', ['$scope', '$ionicLoading', 'AuthService','CONFIG', 'jwtHelper', 'store', '$location', '$stateParams', '$cordovaCamera',  function ($scope, $ionicLoading, AuthService, CONFIG, jwtHelper, store, $location, $stateParams, $cordovaCamera) {
     var _form = null;
     $scope.credentials = {
       username: '',
@@ -109,14 +109,98 @@ angular.module('DicormoApp')
         $scope.$apply()
         console.log(user);
 
-        $scope.getPhoto = function() {
-          console.log('getPhoto');
-          Camera.getPicture().then(function(imageURI) {
-            console.log(imageURI);
+
+    }])
+
+    .controller('ChangePictureCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', '$cordovaCamera', function($scope, CONFIG, jwtHelper, store, studentFactory, $cordovaCamera)
+    {    
+        var user = store.get("user");
+        $scope.user = store.get("user");
+        $scope.$apply()
+        $scope.takePic = function() {
+            console.log("camara")
+              var options = { 
+              quality : 75, 
+              destinationType : Camera.DestinationType.DATA_URL, 
+              sourceType : Camera.PictureSourceType.CAMERA, 
+              allowEdit : true,
+              encodingType: Camera.EncodingType.PNG,
+              targetWidth: 300,
+              targetHeight: 300,
+              popoverOptions: CameraPopoverOptions,
+              saveToPhotoAlbum: false
+          };
+
+          $cordovaCamera.getPicture(options).then(function(imageData) {
+              $scope.picData = "data:image/jpeg;base64," +imageData;
+              $scope.$apply();
           }, function(err) {
-            console.err(err);
+              // An error occured. Show a message to the user
           });
-        };
+        }
+
+        $scope.takeGal = function() {
+          console.log('galeria')
+            var options = { 
+              quality : 75, 
+              destinationType : Camera.DestinationType.DATA_URL, 
+              sourceType : Camera.PictureSourceType.PHOTOLIBRARY, 
+              allowEdit : true,
+              encodingType: Camera.EncodingType.PNG,
+              targetWidth: 300,
+              targetHeight: 300,
+              popoverOptions: CameraPopoverOptions,
+              saveToPhotoAlbum: false
+          };
+
+          $cordovaCamera.getPicture(options).then(function(imageData) {
+              $scope.picData = "data:image/jpeg;base64," +imageData;
+              $scope.$apply();
+          }, function(err) {
+              // An error occured. Show a message to the user
+          });
+        }
+
+        $scope.send = function() {            
+          var myImg = $scope.picData;
+          var options = new FileUploadOptions();
+                  options.fileKey="pics";
+                  options.chunkedMode = false;
+
+                  var params = {};
+                  params.user_token = localStorage.getItem('auth_token');
+                  params.user_email = localStorage.getItem('email');
+                  options.params = params;
+
+              // var ft = new FileTransfer();
+              // ft.upload(myImg.src, encodeURI("https://xxx.herokuapp.com/ics/"), onUploadSuccess, onUploadFail, options);
+
+          }
+
+          $scope.doUpload = function() {
+            var myImg = $scope.picData;
+            var user = store.get("user");
+            var kind;
+            var rol_id = store.get("rol_id");
+            if (rol_id == 3) {
+              kind = "teacher"
+            }else{
+              kind = "student"
+            }
+            console.log(kind)
+            console.log(myImg)
+            console.log(user.id)
+            // $ionicLoading.show({template: 'Cargando...'});
+            // PostPicture.update(myImg, user.id, kind)
+            // .then(function (res){
+            //   if (res.data && res.statusText == 'OK') {
+            //       $ionicLoading.hide();
+            //       $scope.picData = '';
+            //       $scope.$apply();
+            //   };
+            // })
+        }
+        
     }])
 
     .controller('LogOutCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)
@@ -298,7 +382,7 @@ angular.module('DicormoApp')
             console.log(data);
             $ionicLoading.hide();
             $scope.assistances = data;
-            $scope.formData = {"date":data.dia.work_date};
+            $scope.formData = {"date":data.dia.id};
             $scope.date = data.dia.work_date;
             $scope.user = store.get("user");
             $scope.$apply()

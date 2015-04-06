@@ -77,6 +77,34 @@ angular.module('DicormoApp')
             }
         }
     }])
+
+    .factory("PostPicture", ["$http", "$q", "CONFIG", function($http, $q, CONFIG)
+    {
+        return {
+            update: function(photo, id, kind)
+            {
+
+                var deferred;
+                deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    skipAuthorization: true,//no queremos enviar el token en esta petición
+                    url: CONFIG.APIURL+'/'+kind+'/'+id+'/updatephoto',
+                    data: "photo=" + photo,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                    .then(function(res)
+                    {
+                        deferred.resolve(res);
+                    })
+                    .then(function(error)
+                    {
+                        deferred.reject(error);
+                    })
+                return deferred.promise;
+            }
+        }
+    }])
     .factory("UpdateTeacherService", ["$http", "$q", "CONFIG", function($http, $q, CONFIG)
     {
         return {

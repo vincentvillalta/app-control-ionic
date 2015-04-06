@@ -1,4 +1,4 @@
-angular.module('DicormoApp', ['ionic', 'ngResource', 'ngMessages', 'ngRoute', 'angular-jwt', 'angular-storage' ])
+angular.module('DicormoApp', ['ionic', 'ngResource', 'ngMessages', 'ngRoute', 'angular-jwt', 'angular-storage', 'ngCordova' ])
   .run(function ($ionicPlatform,$ionicPopup) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -115,6 +115,11 @@ angular.module('DicormoApp', ['ionic', 'ngResource', 'ngMessages', 'ngRoute', 'a
         url: '/studentScore/:mes/:num',
         templateUrl: 'views/home/score.html',
         controller: 'StudentScoreCtrl'
+      })
+      .state('home.changePicture', {
+        url: '/changePicture',
+        templateUrl: 'views/home/changePicture.html',
+        controller: 'ChangePictureCtrl'
       })
 
     ;
