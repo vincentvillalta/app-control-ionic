@@ -1,0 +1,30 @@
+
+<ion-header-bar align-title="center" class="bar-app-header" xmlns="http://www.w3.org/1999/html">
+    <h1 class="title">Fotografia</h1>
+</ion-header-bar>
+<ion-view title="Editar información">
+
+    <ion-content>
+        <div class="login_form">
+            <p class="notification">Cambia tu fotografia</p>
+                <div class="">
+                    <button class="nav-clear button button-block app-button-green" ng-click="takeGal()">
+                        Desde Galeria
+                    </button>
+
+                    <button class="nav-clear button button-block app-button-green" ng-click="takePic()">
+                        Camara
+                    </button>
+                </div>
+                <img ng-src="{{picData}}" style="max-width: 100%; text-align:center">
+                <div class="">
+                    <button class="nav-clear button button-block app-button-green" ng-if="picData" ng-click="doUpload()">
+                        Enviar
+                    </button>
+                </div>
+            </form>
+        </div>
+
+
+    </ion-content>
+</ion-view>
