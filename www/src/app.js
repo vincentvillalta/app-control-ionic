@@ -35,7 +35,8 @@ angular.module('DicormoApp', ['ionic', 'ngResource', 'ngMessages', 'ngRoute', 'a
     $stateProvider
       .state('home', {
         url: '/home',
-        templateUrl: 'views/home/home.html'
+        templateUrl: 'views/home/home.html',
+        controller:'HomeCtrl'
       })
       .state('home.slide', {
         url: '/slide',
@@ -55,6 +56,11 @@ angular.module('DicormoApp', ['ionic', 'ngResource', 'ngMessages', 'ngRoute', 'a
         url: '/login',
         templateUrl: 'views/home/login.html',
         controller: 'LoginCtrl'
+      })
+      .state('home.logout', {
+        url: '/logout',
+        templateUrl: 'views/home/login.html',
+        controller: 'LogOutCtrl'
       })
       .state('home.student', {
           url: '/student',

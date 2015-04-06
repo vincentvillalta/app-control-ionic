@@ -27,6 +27,8 @@ angular.module('DicormoApp')
               {
                   store.set('token', res.data.response.token);
                   console.log(res.data);
+                  store.set('rol_id', res.data.user.rol_id);
+                  console.log(res.data.user.rol_id);
                   if (res.data.user.rol_id == 4) {
                     var $http = angular.injector(['ng']).get('$http');
                     var url = 'http://104.236.42.145/app/student/' +res.data.user.id_member
@@ -85,7 +87,7 @@ angular.module('DicormoApp')
 
   }])
 
-    .controller('StudentCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)
+    .controller('StudentCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', '$ionicLoading',function($scope, CONFIG, jwtHelper, store, studentFactory, $ionicLoading)
     {
         //obtenemos el token en localStorage
         var token = store.get("token");
@@ -96,18 +98,26 @@ angular.module('DicormoApp')
         $scope.$apply()
 
 
-        
+
 
     }])
     .controller('HomeCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)
     {    
         var user = store.get("user");
         $scope.user = store.get("user");
+        $scope.rol = store.get("rol_id");
         $scope.$apply()
         console.log(user);
     }])
 
-    .controller('ScheduleCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)
+    .controller('LogOutCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)
+    {    
+        store.remove("user");
+        store.remove("rol_id");
+        $scope.$apply()
+    }])
+
+    .controller('ScheduleCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory','$ionicLoading', function($scope, CONFIG, jwtHelper, store, studentFactory, $ionicLoading)
     {
         
         var user = store.get("user");
@@ -115,10 +125,11 @@ angular.module('DicormoApp')
         var url = 'http://104.236.42.145/app/student/' +user.id+'/schedule/'+user.horario.id
         console.log(url)
         var semaphore = false;
-        
+        $ionicLoading.show({template: 'Cargando...'});
         $http.get(url).
           success(function(data, status, headers, config) {
             console.log(data);
+            $ionicLoading.hide();
             $scope.schedule = data;
             $scope.user = store.get("user");
             $scope.$apply()
@@ -132,12 +143,13 @@ angular.module('DicormoApp')
 
     }])
 
-    .controller('ClassesCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
+    .controller('ClassesCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', '$ionicLoading',function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading)
     {
         
         var user = store.get("user");
         var $http = angular.injector(['ng']).get('$http');
         var clases  = $stateParams.id;
+        $ionicLoading.show({template: 'Cargando...'});
         var url = 'http://104.236.42.145/app/teacher/'+user.id+'/clases/'+clases
         console.log(url)
         $http.get(url).
@@ -152,6 +164,7 @@ angular.module('DicormoApp')
               }).error(function(response, statusCheck, headersCheck, configCheck) {console.log(headers)});
             $scope.clases = data;
             $scope.user = store.get("user");
+            $ionicLoading.hide();
             $scope.$apply()
           }).
           error(function(data, status, headers, config) {
@@ -159,12 +172,13 @@ angular.module('DicormoApp')
         });
     }])
 
-    .controller('BeforeScoreCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
+    .controller('BeforeScoreCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', '$ionicLoading', function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading)
     {
         
         var user = store.get("user");
         var $http = angular.injector(['ng']).get('$http');
         var clases  = $stateParams.id;
+        $ionicLoading.show({template: 'Cargando...'});
         var url = 'http://104.236.42.145/app/student/'+user.id+'/evaluaciones'
         console.log(url)
         $scope.toggleGroup = function(group) {
@@ -181,6 +195,7 @@ angular.module('DicormoApp')
         $http.get(url).
           success(function(data, status, headers, config) {
             console.log(data);
+            $ionicLoading.hide();
             $scope.preEvaluations = data;
             $scope.user = store.get("user");
             $scope.$apply()
@@ -190,18 +205,20 @@ angular.module('DicormoApp')
         });
     }])
 
-    .controller('StudentScoreCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
+    .controller('StudentScoreCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams','$ionicLoading', function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading)
     {
         
         var user = store.get("user");
         var $http = angular.injector(['ng']).get('$http');
         var mes  = $stateParams.mes;
         var num = $stateParams.num;
+        $ionicLoading.show({template: 'Cargando...'});
         var url = 'http://104.236.42.145/app/student/'+user.id+'/calificaciones/'+mes+'/no/'+num
         console.log(url)
         $http.get(url).
           success(function(data, status, headers, config) {
             console.log(data);
+            $ionicLoading.hide();
             $scope.calificacionesStudent = data;
             $scope.user = store.get("user");
             $scope.$apply()
@@ -258,38 +275,54 @@ angular.module('DicormoApp')
         }
     }])
 
-    .controller('AssistencesCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
+    .controller('AssistencesCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', '$ionicLoading',function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading)
     {
         
         var user = store.get("user");
         var $http = angular.injector(['ng']).get('$http');
         var clases  = $stateParams.id;
+        $ionicLoading.show({template: 'Cargando...'});
         var url = 'http://104.236.42.145/app/teacher/'+user.id+'/clases/'+clases+'/asistencias'
         console.log(url)
         $http.get(url).
           success(function(data, status, headers, config) {
             console.log(data);
+            $ionicLoading.hide();
             $scope.assistances = data;
+            $scope.formData = {"date":data.dia.work_date};
+            $scope.date = data.dia.work_date;
             $scope.user = store.get("user");
             $scope.$apply()
           }).
           error(function(data, status, headers, config) {
           console.log(headers);
         });
+
+        $scope.sendAssistance = function(data, teacher_id, clase_id) {
+          $ionicLoading.show({template: 'Cargando...'});
+          DoSendAssistance.update(data)
+          .then(function (res){
+            if (res.data && res.statusText == 'OK') {
+                $ionicLoading.hide();
+            };
+          })
+        }
+
     }])
 
-    .controller('EvalCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', function($scope, CONFIG, jwtHelper, store, $stateParams)
+    .controller('EvalCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', '$ionicLoading',function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading)
     {
         
         var user = store.get("user");
         var $http = angular.injector(['ng']).get('$http');
         var clases  = $stateParams.id;
-
+        $ionicLoading.show({template: 'Cargando...'});
         var url = 'http://104.236.42.145/app/teacher/'+user.id+'/clases/'+clases+'/evaluaciones'
         console.log(url)
         $http.get(url).
           success(function(data, status, headers, config) {
             console.log(data);
+            $ionicLoading.hide();
             $scope.evaluation = data;
             $scope.user = store.get("user");
             $scope.$apply()
@@ -297,9 +330,19 @@ angular.module('DicormoApp')
           error(function(data, status, headers, config) {
           console.log(headers);
         });
+
+        $scope.sendEvaluations = function(data, teacher_id, clase_id) {
+          $ionicLoading.show({template: 'Cargando...'});
+          DoSendEvaluation.update(data)
+          .then(function (res){
+            if (res.data && res.statusText == 'OK') {
+                $ionicLoading.hide();
+            };
+          })
+        }
     }])
 
-    .controller('TeacherCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)
+    .controller('TeacherCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', '$ionicLoading',function($scope, CONFIG, jwtHelper, store, studentFactory, $ionicLoading)
     {
         //obtenemos el token en localStorage
         var token = store.get("token");
