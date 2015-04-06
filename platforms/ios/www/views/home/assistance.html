@@ -4,27 +4,28 @@
 
 <ion-view class="has-header ">
     <ion-content class="app-student-content has-footer">
-
-
         <div class="content-options content-clase">
 
             <div class="info_student ">
                 <h4 class="text-center">ASISTENCIAS</h4>
+                <p class="notification" >{{date}}</p>
 
-                <p class="notification">23 Marzo 2015</p>
-
+                <form ng-submit="submitAssistance(formData)" >
                 <ul class="list text-left">
                     <li class="item item-checkbox" ng-repeat="alumno in assistances.alumnos">
                         <label class="checkbox checkbox-balanced">
-                            <input type="checkbox" ng-value="{{alumno.id}}" ng-checked="selection.indexOf(alumno) > -1" ng-click="toggleSelection(alumno)">
+                            <input type="checkbox" name="alumno.id" ng-model="formData.asistencias[alumno.id]">
                         </label>
                         {{alumno.name}} {{alumno.last_name}}
                     </li>
-
                 </ul>
+                </form>
+<!--     <li class="item item-checkbox">
+        {{ formData }}
+    </li> -->
 
                 <div class="text-right">
-                    <button class="button button-outline button-balanced">
+                    <button class="button button-outline button-balanced" ng-click="sendAssistance(formData, {{assistances.clase.id}}, {{assistances.clase.teacher_id}})">
                         ENVIAR
                     </button>
                 </div>

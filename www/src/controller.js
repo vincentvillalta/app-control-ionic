@@ -108,6 +108,15 @@ angular.module('DicormoApp')
         $scope.rol = store.get("rol_id");
         $scope.$apply()
         console.log(user);
+
+        $scope.getPhoto = function() {
+          console.log('getPhoto');
+          Camera.getPicture().then(function(imageURI) {
+            console.log(imageURI);
+          }, function(err) {
+            console.err(err);
+          });
+        };
     }])
 
     .controller('LogOutCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', function($scope, CONFIG, jwtHelper, store, studentFactory)

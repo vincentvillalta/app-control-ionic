@@ -104,6 +104,63 @@ angular.module('DicormoApp')
             }
         }
     }])
+    .factory("DoSendAssistance", ["$http", "$q", "CONFIG", function($http, $q, CONFIG)
+    {
+        return {
+            update: function(dataToSend, clase_id, teacher_id)
+            {
+
+                var deferred;
+                deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    skipAuthorization: true,//no queremos enviar el token en esta petición
+                    url: CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/asistencias',
+                    data: "data=" + dataToSend,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                    .then(function(res)
+                    {
+                        deferred.resolve(res);
+                    })
+                    .then(function(error)
+                    {
+                        deferred.reject(error);
+                    })
+                return deferred.promise;
+            }
+        }
+    }])
+
+    .factory("DoSendEvaluation", ["$http", "$q", "CONFIG", function($http, $q, CONFIG)
+    {
+        return {
+            update: function(dataToSend, clase_id, teacher_id)
+            {
+
+                var deferred;
+                deferred = $q.defer();
+                $http({
+                    method: 'POST',
+                    skipAuthorization: true,//no queremos enviar el token en esta petición
+                    url: CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/evaluation',
+                    data: "data=" + dataToSend,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                    .then(function(res)
+                    {
+                        deferred.resolve(res);
+                    })
+                    .then(function(error)
+                    {
+                        deferred.reject(error);
+                    })
+                return deferred.promise;
+            }
+        }
+    }])
+
+
   .factory('Blog', ['$resource', function ($resource) {
     return $resource('http://dicormo.com/wp-json/posts/:id?filter[posts_per_page]=3', {id: '@id'});
   }])

@@ -9,64 +9,60 @@
             <div class="info_student ">
                 <h4 class="text-center">REGISTRAR EVALUACIÓN</h4>
                 <div class="list">
-
+                    <form ng-submit="sendEvaluations(evaluationForm)">
                     <div class="item item-input item-select">
                         <div class="input-label">
                             No. de Evaluación:
                         </div>
-                        <select>
-                            <option>Selecciona</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <select name="no_evaluation" ng-model="evaluationForm.no_evaluation">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
                         </select>
                     </div>
 
-                    <div class="item item-input item-select">
+                    <div class="item item-input item-select" >
                         <div class="input-label">
                             No. de Evaluación:
                         </div>
-                        <select>
-                            <option>Selecciona</option>
-                            <option>Enero</option>
-                            <option>Febrero</option>
-                            <option>Marzo</option>
-                            <option>Abril</option>
-                            <option>Mayo</option>
-                            <option>Junio</option>
-                            <option>Julio</option>
-                            <option>Agosto</option>
-                            <option>Septiembre</option>
-                            <option>Octubre</option>
-                            <option>Noviembre</option>
-                            <option>Diciembre</option>
+                        <select name="no_month" ng-model="evaluationForm.no_month">
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
                         </select>
                     </div>
                 </div>
-
 
 
                 <ul class="list text-left">
 
                     <li class="item item-input "  ng-repeat="alumno in evaluation.datos">
-                        <span class="input-label">{{alumno.student.name}} {{alumno.student.last_name}}</span>
+                        <span class="input-label"  ng-model="evaluationForm.id[alumno.id]">{{alumno.student.name}} {{alumno.student.last_name}}</span>
                         <label class="item item-input">
-                            <input type="text" value='{{alumno.student.score_parcial}} '>
+                            <input type="text" id="{{alumno.student.id}}" name="{{alumno.student.id}}" ng-model="evaluationForm.parcial[alumno.student.id]" >
                         </label>
                     </li>
 
                 </ul>
 
-
                 <div class="text-right">
-                    <button class="button button-outline button-balanced">
+                    <button class="button button-outline button-balanced" ng-click="sendEvaluations(evaluationForm, {{evaluation.clase.id}},{{evaluation.clase.teacher_id}})">
                         ENVIAR
                     </button>
                 </div>
 
-
+                </form>
             </div>
 
         </div>
