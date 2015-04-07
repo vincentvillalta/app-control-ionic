@@ -391,11 +391,11 @@ angular.module('DicormoApp')
           console.log(headers);
         });
 
-        $scope.sendAssistance = function(data, teacher_id, clase_id) {
-
+        $scope.sendAssistance = function(data, clase_id, teacher_id) {
+          console.log('Data: '+data)
           console.log(teacher_id)
           $ionicLoading.show({template: 'Cargando...'});
-          DoSendAssistance.update(data, teacher_id, clase_id)
+          DoSendAssistance.update(data, clase_id, teacher_id)
           .then(function (res){
             if (res.data && res.statusText == 'OK') {
                 $ionicLoading.hide();
@@ -426,9 +426,10 @@ angular.module('DicormoApp')
           console.log(headers);
         });
 
-        $scope.sendEvaluations = function(data, teacher_id, clase_id) {
+        $scope.sendEvaluations = function(data, clase_id, teacher_id) {
+          console.log('Data: '+data)
           $ionicLoading.show({template: 'Cargando...'});
-          DoSendEvaluation.update(data, teacher_id, clase_id)
+          DoSendEvaluation.update(data, clase_id, teacher_id)
           .then(function (res){
             if (res.data && res.statusText == 'OK') {
                 $ionicLoading.hide();

@@ -139,6 +139,8 @@ angular.module('DicormoApp')
             {
                 var deferred;
                 deferred = $q.defer();
+                console.log('URL ---> '+CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/asistencias')
+                console.log('dataToSend ---> '+dataToSend)
                 $http({
                     method: 'POST',
                     skipAuthorization: true,//no queremos enviar el token en esta petición
@@ -164,9 +166,10 @@ angular.module('DicormoApp')
         return {
             update: function(dataToSend, clase_id, teacher_id)
             {
-
                 var deferred;
                 deferred = $q.defer();
+                console.log('URL ---> '+CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/evaluation')
+                console.log('dataToSend ---> '+dataToSend)
                 $http({
                     method: 'POST',
                     skipAuthorization: true,//no queremos enviar el token en esta petición
