@@ -30,7 +30,7 @@ angular.module('DicormoApp', ['ionic', 'ngResource', 'ngMessages', 'ngRoute', 'a
 .constant('CONFIG', {
     APIURL: "http://104.236.42.145/app"
 })
-  .config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider, $stateProvider) {
+  .config(['$urlRouterProvider', '$stateProvider', '$httpProvider', function ($urlRouterProvider, $stateProvider, $httpProvider) {
 
     $stateProvider
       .state('home', {
@@ -126,5 +126,11 @@ angular.module('DicormoApp', ['ionic', 'ngResource', 'ngMessages', 'ngRoute', 'a
 
 
     $urlRouterProvider.otherwise('/home/slide');
+
+    $httpProvider.defaults.useXDomain = true;
+    $httpProvider.defaults.withCredentials = true;
+    delete $httpProvider.defaults.headers.common["X-Requested-With"];
+    $httpProvider.defaults.headers.common["Accept"] = "application/json";
+    $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
 
   }]);

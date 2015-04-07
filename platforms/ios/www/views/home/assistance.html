@@ -10,7 +10,7 @@
                 <h4 class="text-center">ASISTENCIAS</h4>
                 <p class="notification" >{{date}}</p>
 
-                <form ng-submit="submitAssistance(formData)" >
+                <form >
                 <ul class="list text-left">
                     <li class="item item-checkbox" ng-repeat="alumno in assistances.alumnos">
                         <label class="checkbox checkbox-balanced">
@@ -25,11 +25,10 @@
     </li> -->
 
                 <div class="text-right">
-                    <button class="button button-outline button-balanced" ng-click="sendAssistance(formData, {{assistances.clase.id}}, {{assistances.clase.teacher_id}})">
+                    <button class="button button-outline button-balanced" ng-click="sendAssistance(formData, assistances.clase.id, assistances.clase.teacher_id)">
                         ENVIAR
                     </button>
                 </div>
-
 
             </div>
 

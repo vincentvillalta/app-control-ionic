@@ -81,9 +81,9 @@ angular.module('DicormoApp')
     .factory("PostPicture", ["$http", "$q", "CONFIG", function($http, $q, CONFIG)
     {
         return {
-            update: function(photo, id, kind)
+            update: function(id, kind, photo)
             {
-
+                console.log("URL ----> "+CONFIG.APIURL+'/'+kind+'/'+id+'/updatephoto');
                 var deferred;
                 deferred = $q.defer();
                 $http({
@@ -95,10 +95,12 @@ angular.module('DicormoApp')
                 })
                     .then(function(res)
                     {
+                        console.log(res)
                         deferred.resolve(res);
                     })
                     .then(function(error)
                     {
+                         console.log(error)
                         deferred.reject(error);
                     })
                 return deferred.promise;

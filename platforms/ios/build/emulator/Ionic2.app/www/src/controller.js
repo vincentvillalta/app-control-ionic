@@ -112,7 +112,7 @@ angular.module('DicormoApp')
 
     }])
 
-    .controller('ChangePictureCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', '$cordovaCamera', function($scope, CONFIG, jwtHelper, store, studentFactory, $cordovaCamera)
+    .controller('ChangePictureCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', '$cordovaCamera', 'PostPicture','$ionicLoading', function($scope, CONFIG, jwtHelper, store, studentFactory, $cordovaCamera, PostPicture, $ionicLoading)
     {    
         var user = store.get("user");
         $scope.user = store.get("user");
@@ -120,18 +120,19 @@ angular.module('DicormoApp')
         $scope.takePic = function() {
             console.log("camara")
               var options = { 
-              quality : 75, 
+              quality : 40, 
               destinationType : Camera.DestinationType.DATA_URL, 
               sourceType : Camera.PictureSourceType.CAMERA, 
               allowEdit : true,
               encodingType: Camera.EncodingType.PNG,
-              targetWidth: 300,
-              targetHeight: 300,
+              targetWidth: 100,
+              targetHeight: 100,
               popoverOptions: CameraPopoverOptions,
               saveToPhotoAlbum: false
           };
 
           $cordovaCamera.getPicture(options).then(function(imageData) {
+              $scope.base64 = imageData;
               $scope.picData = "data:image/jpeg;base64," +imageData;
               $scope.$apply();
           }, function(err) {
@@ -142,18 +143,19 @@ angular.module('DicormoApp')
         $scope.takeGal = function() {
           console.log('galeria')
             var options = { 
-              quality : 75, 
+              quality : 40, 
               destinationType : Camera.DestinationType.DATA_URL, 
               sourceType : Camera.PictureSourceType.PHOTOLIBRARY, 
               allowEdit : true,
               encodingType: Camera.EncodingType.PNG,
-              targetWidth: 300,
-              targetHeight: 300,
+              targetWidth: 100,
+              targetHeight: 100,
               popoverOptions: CameraPopoverOptions,
               saveToPhotoAlbum: false
           };
 
           $cordovaCamera.getPicture(options).then(function(imageData) {
+              $scope.base64 = imageData;
               $scope.picData = "data:image/jpeg;base64," +imageData;
               $scope.$apply();
           }, function(err) {
@@ -161,24 +163,9 @@ angular.module('DicormoApp')
           });
         }
 
-        $scope.send = function() {            
-          var myImg = $scope.picData;
-          var options = new FileUploadOptions();
-                  options.fileKey="pics";
-                  options.chunkedMode = false;
-
-                  var params = {};
-                  params.user_token = localStorage.getItem('auth_token');
-                  params.user_email = localStorage.getItem('email');
-                  options.params = params;
-
-              // var ft = new FileTransfer();
-              // ft.upload(myImg.src, encodeURI("https://xxx.herokuapp.com/ics/"), onUploadSuccess, onUploadFail, options);
-
-          }
 
           $scope.doUpload = function() {
-            var myImg = $scope.picData;
+            var myImg = $scope.base64;
             var user = store.get("user");
             var kind;
             var rol_id = store.get("rol_id");
@@ -187,18 +174,17 @@ angular.module('DicormoApp')
             }else{
               kind = "student"
             }
-            console.log(kind)
             console.log(myImg)
-            console.log(user.id)
-            // $ionicLoading.show({template: 'Cargando...'});
-            // PostPicture.update(myImg, user.id, kind)
-            // .then(function (res){
-            //   if (res.data && res.statusText == 'OK') {
-            //       $ionicLoading.hide();
-            //       $scope.picData = '';
-            //       $scope.$apply();
-            //   };
-            // })
+           $ionicLoading.show({template: 'Cargando...'});
+            PostPicture.update(user.id, kind, myImg)
+            .then(function (res){
+              console.log(res)
+              if (res.data && res.statusText == 'OK') {
+                  $ionicLoading.hide();
+                  $scope.picData = '';
+                  $scope.$apply();
+              };
+            })
         }
         
     }])
@@ -344,7 +330,7 @@ angular.module('DicormoApp')
           })
         }
     }])
-    .controller('EditTeacherCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams','$ionicLoading', 'UpdateService', function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading, UpdateService)
+    .controller('EditTeacherCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams','$ionicLoading', 'UpdateTeacherService', function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading, UpdateService)
     {
         
         $scope.user = store.get("user");
@@ -368,7 +354,7 @@ angular.module('DicormoApp')
         }
     }])
 
-    .controller('AssistencesCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', '$ionicLoading',function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading)
+    .controller('AssistencesCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', '$ionicLoading','DoSendAssistance', function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading, DoSendAssistance)
     {
         
         var user = store.get("user");
@@ -391,9 +377,11 @@ angular.module('DicormoApp')
           console.log(headers);
         });
 
-        $scope.sendAssistance = function(data, teacher_id, clase_id) {
+        $scope.sendAssistance = function(data, clase_id, teacher_id) {
+          console.log('Data: '+data)
+          console.log(teacher_id)
           $ionicLoading.show({template: 'Cargando...'});
-          DoSendAssistance.update(data)
+          DoSendAssistance.update(data, clase_id, teacher_id)
           .then(function (res){
             if (res.data && res.statusText == 'OK') {
                 $ionicLoading.hide();
@@ -403,7 +391,7 @@ angular.module('DicormoApp')
 
     }])
 
-    .controller('EvalCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', '$ionicLoading',function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading)
+    .controller('EvalCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', '$ionicLoading', 'DoSendEvaluation',function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading, DoSendEvaluation)
     {
         
         var user = store.get("user");
@@ -424,9 +412,10 @@ angular.module('DicormoApp')
           console.log(headers);
         });
 
-        $scope.sendEvaluations = function(data, teacher_id, clase_id) {
+        $scope.sendEvaluations = function(data, clase_id, teacher_id) {
+          console.log('Data: '+data)
           $ionicLoading.show({template: 'Cargando...'});
-          DoSendEvaluation.update(data)
+          DoSendEvaluation.update(data, clase_id, teacher_id)
           .then(function (res){
             if (res.data && res.statusText == 'OK') {
                 $ionicLoading.hide();

@@ -112,7 +112,7 @@ angular.module('DicormoApp')
 
     }])
 
-    .controller('ChangePictureCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', '$cordovaCamera', 'PostPicture', function($scope, CONFIG, jwtHelper, store, studentFactory, $cordovaCamera, PostPicture)
+    .controller('ChangePictureCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', '$cordovaCamera', 'PostPicture','$ionicLoading', function($scope, CONFIG, jwtHelper, store, studentFactory, $cordovaCamera, PostPicture, $ionicLoading)
     {    
         var user = store.get("user");
         $scope.user = store.get("user");
@@ -120,18 +120,19 @@ angular.module('DicormoApp')
         $scope.takePic = function() {
             console.log("camara")
               var options = { 
-              quality : 75, 
+              quality : 40, 
               destinationType : Camera.DestinationType.DATA_URL, 
               sourceType : Camera.PictureSourceType.CAMERA, 
               allowEdit : true,
               encodingType: Camera.EncodingType.PNG,
-              targetWidth: 300,
-              targetHeight: 300,
+              targetWidth: 100,
+              targetHeight: 100,
               popoverOptions: CameraPopoverOptions,
               saveToPhotoAlbum: false
           };
 
           $cordovaCamera.getPicture(options).then(function(imageData) {
+              $scope.base64 = imageData;
               $scope.picData = "data:image/jpeg;base64," +imageData;
               $scope.$apply();
           }, function(err) {
@@ -142,18 +143,19 @@ angular.module('DicormoApp')
         $scope.takeGal = function() {
           console.log('galeria')
             var options = { 
-              quality : 75, 
+              quality : 40, 
               destinationType : Camera.DestinationType.DATA_URL, 
               sourceType : Camera.PictureSourceType.PHOTOLIBRARY, 
               allowEdit : true,
               encodingType: Camera.EncodingType.PNG,
-              targetWidth: 300,
-              targetHeight: 300,
+              targetWidth: 100,
+              targetHeight: 100,
               popoverOptions: CameraPopoverOptions,
               saveToPhotoAlbum: false
           };
 
           $cordovaCamera.getPicture(options).then(function(imageData) {
+              $scope.base64 = imageData;
               $scope.picData = "data:image/jpeg;base64," +imageData;
               $scope.$apply();
           }, function(err) {
@@ -161,24 +163,9 @@ angular.module('DicormoApp')
           });
         }
 
-        $scope.send = function() {            
-          var myImg = $scope.picData;
-          var options = new FileUploadOptions();
-                  options.fileKey="pics";
-                  options.chunkedMode = false;
-
-                  var params = {};
-                  params.user_token = localStorage.getItem('auth_token');
-                  params.user_email = localStorage.getItem('email');
-                  options.params = params;
-
-              // var ft = new FileTransfer();
-              // ft.upload(myImg.src, encodeURI("https://xxx.herokuapp.com/ics/"), onUploadSuccess, onUploadFail, options);
-
-          }
 
           $scope.doUpload = function() {
-            var myImg = $scope.picData;
+            var myImg = $scope.base64;
             var user = store.get("user");
             var kind;
             var rol_id = store.get("rol_id");
@@ -187,12 +174,11 @@ angular.module('DicormoApp')
             }else{
               kind = "student"
             }
-            console.log(kind)
             console.log(myImg)
-            console.log(user.id)
-            $ionicLoading.show({template: 'Cargando...'});
-            PostPicture.update(myImg, user.id, kind)
+           $ionicLoading.show({template: 'Cargando...'});
+            PostPicture.update(user.id, kind, myImg)
             .then(function (res){
+              console.log(res)
               if (res.data && res.statusText == 'OK') {
                   $ionicLoading.hide();
                   $scope.picData = '';

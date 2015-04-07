@@ -9,7 +9,7 @@
             <div class="info_student ">
                 <h4 class="text-center">REGISTRAR EVALUACIÓN</h4>
                 <div class="list">
-                    <form ng-submit="sendEvaluations(evaluationForm)">
+                    <form>
                     <div class="item item-input item-select">
                         <div class="input-label">
                             No. de Evaluación:
@@ -57,7 +57,7 @@
                 </ul>
 
                 <div class="text-right">
-                    <button class="button button-outline button-balanced" ng-click="sendEvaluations(evaluationForm, {{evaluation.clase.id}},{{evaluation.clase.teacher_id}})">
+                    <button class="button button-outline button-balanced" ng-click="sendEvaluations(evaluationForm, evaluation.clase.id, evaluation.clase.teacher_id)">
                         ENVIAR
                     </button>
                 </div>

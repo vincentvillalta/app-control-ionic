@@ -81,9 +81,9 @@ angular.module('DicormoApp')
     .factory("PostPicture", ["$http", "$q", "CONFIG", function($http, $q, CONFIG)
     {
         return {
-            update: function(photo, id, kind)
+            update: function(id, kind, photo)
             {
-
+                console.log("URL ----> "+CONFIG.APIURL+'/'+kind+'/'+id+'/updatephoto');
                 var deferred;
                 deferred = $q.defer();
                 $http({
@@ -95,10 +95,12 @@ angular.module('DicormoApp')
                 })
                     .then(function(res)
                     {
+                        console.log(res)
                         deferred.resolve(res);
                     })
                     .then(function(error)
                     {
+                         console.log(error)
                         deferred.reject(error);
                     })
                 return deferred.promise;
@@ -137,14 +139,15 @@ angular.module('DicormoApp')
         return {
             update: function(dataToSend, clase_id, teacher_id)
             {
-
                 var deferred;
                 deferred = $q.defer();
+                console.log('URL ---> '+CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/asistencias')
+                console.log('dataToSend ---> '+JSON.stringify(dataToSend))
                 $http({
                     method: 'POST',
                     skipAuthorization: true,//no queremos enviar el token en esta petición
                     url: CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/asistencias',
-                    data: "data=" + dataToSend,
+                    data: "data=" + JSON.stringify(dataToSend),
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 })
                     .then(function(res)
@@ -165,14 +168,16 @@ angular.module('DicormoApp')
         return {
             update: function(dataToSend, clase_id, teacher_id)
             {
-
                 var deferred;
                 deferred = $q.defer();
+                console.log('URL ---> '+CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/evaluation')
+                console.log('dataToSend ---> '+JSON.stringify(dataToSend))
+
                 $http({
                     method: 'POST',
                     skipAuthorization: true,//no queremos enviar el token en esta petición
                     url: CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/evaluation',
-                    data: "data=" + dataToSend,
+                    data: "data=" + JSON.stringify(dataToSend),
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 })
                     .then(function(res)
