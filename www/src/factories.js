@@ -137,14 +137,14 @@ angular.module('DicormoApp')
         return {
             update: function(dataToSend, clase_id, teacher_id)
             {
-
+                console.log("URL ---------> "+CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/asistencias');
                 var deferred;
                 deferred = $q.defer();
                 $http({
                     method: 'POST',
                     skipAuthorization: true,//no queremos enviar el token en esta petición
                     url: CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/asistencias',
-                    data: "data=prueba",
+                    data: "data=" + dataToSend,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 })
                     .then(function(res)

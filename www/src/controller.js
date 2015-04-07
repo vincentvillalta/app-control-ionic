@@ -112,7 +112,7 @@ angular.module('DicormoApp')
 
     }])
 
-    .controller('ChangePictureCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', '$cordovaCamera', function($scope, CONFIG, jwtHelper, store, studentFactory, $cordovaCamera)
+    .controller('ChangePictureCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', 'studentFactory', '$cordovaCamera', 'PostPicture', function($scope, CONFIG, jwtHelper, store, studentFactory, $cordovaCamera, PostPicture)
     {    
         var user = store.get("user");
         $scope.user = store.get("user");
@@ -344,7 +344,7 @@ angular.module('DicormoApp')
           })
         }
     }])
-    .controller('EditTeacherCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams','$ionicLoading', 'UpdateService', function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading, UpdateService)
+    .controller('EditTeacherCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams','$ionicLoading', 'UpdateTeacherService', function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading, UpdateService)
     {
         
         $scope.user = store.get("user");
@@ -368,7 +368,7 @@ angular.module('DicormoApp')
         }
     }])
 
-    .controller('AssistencesCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', '$ionicLoading',function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading)
+    .controller('AssistencesCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', '$ionicLoading','DoSendAssistance', function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading, DoSendAssistance)
     {
         
         var user = store.get("user");
@@ -392,8 +392,10 @@ angular.module('DicormoApp')
         });
 
         $scope.sendAssistance = function(data, teacher_id, clase_id) {
+
+          console.log(teacher_id)
           $ionicLoading.show({template: 'Cargando...'});
-          DoSendAssistance.update(data)
+          DoSendAssistance.update(data, teacher_id, clase_id)
           .then(function (res){
             if (res.data && res.statusText == 'OK') {
                 $ionicLoading.hide();
@@ -403,7 +405,7 @@ angular.module('DicormoApp')
 
     }])
 
-    .controller('EvalCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', '$ionicLoading',function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading)
+    .controller('EvalCtrl', ['$scope','CONFIG', 'jwtHelper', 'store', '$stateParams', '$ionicLoading', 'DoSendEvaluation',function($scope, CONFIG, jwtHelper, store, $stateParams, $ionicLoading, DoSendEvaluation)
     {
         
         var user = store.get("user");
