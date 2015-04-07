@@ -140,12 +140,12 @@ angular.module('DicormoApp')
                 var deferred;
                 deferred = $q.defer();
                 console.log('URL ---> '+CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/asistencias')
-                console.log('dataToSend ---> '+dataToSend)
+                console.log('dataToSend ---> '+JSON.stringify(dataToSend))
                 $http({
                     method: 'POST',
                     skipAuthorization: true,//no queremos enviar el token en esta petición
                     url: CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/asistencias',
-                    data: "data=" + dataToSend,
+                    data: "data=" + JSON.stringify(dataToSend),
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 })
                     .then(function(res)
@@ -169,13 +169,14 @@ angular.module('DicormoApp')
                 var deferred;
                 deferred = $q.defer();
                 console.log('URL ---> '+CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/evaluation')
-                console.log('dataToSend ---> '+dataToSend)
+                console.log('dataToSend ---> '+JSON.stringify(dataToSend))
+
                 $http({
                     method: 'POST',
                     skipAuthorization: true,//no queremos enviar el token en esta petición
                     url: CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/evaluation',
-                    data: { data : dataToSend}
-                    //headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    data: "data=" + JSON.stringify(dataToSend),
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 })
                     .then(function(res)
                     {
