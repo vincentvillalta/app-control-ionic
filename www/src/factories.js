@@ -144,8 +144,8 @@ angular.module('DicormoApp')
                     method: 'POST',
                     skipAuthorization: true,//no queremos enviar el token en esta petición
                     url: CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/asistencias',
-                     data: { data: dataToSend}
-                    //headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    data: "data=prueba",
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 })
                     .then(function(res)
                     {
@@ -172,8 +172,8 @@ angular.module('DicormoApp')
                     method: 'POST',
                     skipAuthorization: true,//no queremos enviar el token en esta petición
                     url: CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/evaluation',
-                    data: { data: dataToSend}
-                    //headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    data: "data=" + dataToSend,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 })
                     .then(function(res)
                     {
