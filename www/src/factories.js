@@ -137,7 +137,6 @@ angular.module('DicormoApp')
         return {
             update: function(dataToSend, clase_id, teacher_id)
             {
-                console.log("URL ---------> "+CONFIG.APIURL+'/teacher/'+teacher_id+'/clases/'+clase_id+'/asistencias');
                 var deferred;
                 deferred = $q.defer();
                 $http({

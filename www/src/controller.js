@@ -428,7 +428,7 @@ angular.module('DicormoApp')
 
         $scope.sendEvaluations = function(data, teacher_id, clase_id) {
           $ionicLoading.show({template: 'Cargando...'});
-          DoSendEvaluation.update(data)
+          DoSendEvaluation.update(data, teacher_id, clase_id)
           .then(function (res){
             if (res.data && res.statusText == 'OK') {
                 $ionicLoading.hide();
