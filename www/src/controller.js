@@ -177,7 +177,7 @@ angular.module('DicormoApp')
             console.log(myImg)
             var url = encodeURI('http://104.236.42.145/app/'+kind+'/'+id+'/updatephoto')
            $ionicLoading.show({template: 'Cargando...'});
-            var ft = new $cordovaFileTransfer(), 
+            var ft = new FileTransfer(), 
             options = new FileUploadOptions();
             options.fileKey = "file";
             options.fileName = uploadimageurl.substr(uploadimageurl.lastIndexOf('/') + 1);
