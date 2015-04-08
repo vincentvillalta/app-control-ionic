@@ -1,0 +1,25 @@
+dependencies: \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/Ionic2/Plugins/org.apache.cordova.file/CDVLocalFilesystem.m \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/Ionic2/Plugins/org.apache.cordova.file/CDVFile.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVPlugin.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVPluginResult.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVAvailability.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVAvailabilityDeprecated.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/NSMutableArray+QueueAdditions.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVCommandDelegate.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVInvokedUrlCommand.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/Ionic2/Plugins/org.apache.cordova.file/CDVLocalFilesystem.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDV.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVViewController.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVCommandQueue.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVWhitelist.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVScreenOrientationDelegate.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVURLProtocol.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVDebug.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVLocalStorage.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVTimer.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/NSArray+Comparisons.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/NSData+Base64.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/NSDictionary+Extensions.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/UIDevice+Extensions.h \
+  /Users/vincentvillalta/Documents/Apps/Hybrid/ionic2/platforms/ios/build/emulator/include/Cordova/CDVJSON.h
